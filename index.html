@@ -1,4 +1,14 @@
 ---
-layout: home
-background: '/img/bg-index.jpg'
+bg: "rails.jpg"
+layout: default
+crawlertitle: "Jekyll blog"
+title: "我的博客"
+summary: "主页"
 ---
+
+{% for post in site.posts limit: 5 %}
+  <article class="index-page">
+    <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+    {{ post.excerpt }}
+  </article>
+{% endfor %}

@@ -1,18 +1,44 @@
-title:             azx1 
-email:             your-email@example.com
-description:       A Blog Theme by Start Bootstrap
-author:            azx1
-baseurl:           "/azx1.github.io"
-url:               "http://azx1.github.io"
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely need to edit after that.
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'jekyll serve'. If you change this file, please restart the server process.
 
-# Social Profiles
-twitter_username:  SBootstrap
-github_username:   BlackrockDigital
-facebook_username: StartBootstrap
+# Site settings
+title: 主页
+email: 1395086733@qq.com
+description: > # this means to ignore newlines until "baseurl:"
+  Write an awesome description for your new site here. You can edit this
+  line in _config.yml. It will appear in your document head meta (for
+  Google search results) and in your feed.xml site description.
+baseurl: "/blog" # the subpath of your site, e.g. /blog
+lang: "zh-cn"
+url: "http://azx1.github.io" # the base hostname & protocol for your site
+twitter_username: Azx1
+github_username:  Jekyll
+disqus_username:
 
 # Build settings
-markdown:          kramdown
-paginate:          5
-paginate_path:     "/posts/page:num/"
-plugins:
-  - jekyll
+markdown: kramdown
+permalink: /:categories/:title/
+
+# Posts settings
+future: true
+safe: false
+lsi: false
+excerpt_separator: "\n\n"
+
+# Theme settings
+compress_html:
+  comments: ["<!-- ", " -->"]
+  clippings: all
+  endings: all
+
+
+sass:
+  sass_dir: assets/_sass
+  style: compressed
+
+
+images: '/assets/images'
