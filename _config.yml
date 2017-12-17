@@ -1,9 +1,9 @@
-title:             Clean Blog
+title:             azx1 
 email:             your-email@example.com
 description:       A Blog Theme by Start Bootstrap
-author:            Start Bootstrap
-baseurl:           "/startbootstrap-clean-blog-jekyll"
-url:               "http://blackrockdigital.github.io"
+author:            azx1
+baseurl:           "/azx1.github.io"
+url:               "http://azx1.github.io"
 
 # Social Profiles
 twitter_username:  SBootstrap
@@ -15,5 +15,4 @@ markdown:          kramdown
 paginate:          5
 paginate_path:     "/posts/page:num/"
 plugins:
-  - jekyll-feed
-  - jekyll-paginate
+  - jekyll
