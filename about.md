@@ -20,7 +20,7 @@ active: about
     [jekyll-new](https://github.com/azx1/azx1.github.io) 
  
 
-- *你可以在这里找到 Jekyll主题原作者：{{site.github_username}}的源码* /
+- *你可以在这里找到 Jekyll主题的源码* /
 
     [jekyll](https://github.com/jekyll/jekyll) 
 
