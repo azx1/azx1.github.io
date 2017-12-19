@@ -1,57 +1,36 @@
+# GLAS - JEKYLL Theme/Blog
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely need to edit after that.
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'jekyll serve'. If you change this file, please restart the server process.
+#FOR MOE INFOS, CHECK OUT THE   - organisers.yml file 
 # Site settings
-title: Hanuman
-description: Hanuman is a minimal yet powerful Jekyll theme for your blogs and websites.
-cover: assets/images/radhakrishna.jpg
-logo: assets/images/logo.png
-favicon: assets/images/favicon.png
-baseurl: "/hanuman/" # the subpath of your site, e.g. /blog/ or / for root
-url: "https://samanyougarg.com" # the base hostname & protocol for your site
-paginate:	5 # The number of posts to show per page on your homepage
+title: Glas 
+#What is the name of the events or talks you would like to host? (Example Brownbags, Talks, Lighting Talks)
+event_label: Events
 
-# Social
-facebook: facebook
-twitter: twitter
-github:  github
+description: > # "
+  your description.....
 
-#Additional Pages
-about: about
-contact: contact
-privacy-policy: privacy-policy
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "http://spaceg.github.io" # the base hostname & protocol for your site
 
-
-permalink: /:title
-
-
-# Google Analytics
-analytics_id: ""
+#These settings might be able to go?
+author: Lucas Gatsas @ spacedig.ch 
+twitter_username: yourtwitter
+github_username:  yourgithub
+company_name: yourname
 
 # Build settings
 markdown: kramdown
 
-kramdown:
-  parse_block_html: true
+#Have to show future posts for future events.
+future: true
 
-plugins:
-  - jekyll-paginate
+permalink: /event/:title.html
+
+#change your port on localhost
+port: 4000
 
 
-# Settings for rake task
-safe: False
-lsi: False
-username: samanyougarg #github username
-repo: hanuman #github repository
-branch: master #branch
-relative_source: ../hanuman/ #source directory
-destination: ../hanuman-pages/ #destination directory
-production_url:  https://samanyougarg.com/
-source_url:  https://github.com/samanyougarg/hanuman #source repository url
-
-exclude:
-  - README.md
-  - Rakefile
-  - Gemfile
-  - Gemfile.lock
-  - changelog.md
-  - "*.Rmd"
-  - vendor
-  - .travis.yml
