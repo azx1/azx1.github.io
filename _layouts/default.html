@@ -1,31 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
-  {% include head.html %}
+{% include head.html %}
 
-<body class="home-template">
-  <div id="page" class="site">
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
 
+    {% include nav.html %}
 
-    {% include header.html %}
-
-
-
-    <div class="page-content">
-      <div class="wrapper">
-        {{ content }}
-      </div>
-    </div>
+    {{ content }}
 
     {% include footer.html %}
 
 
-            <div class="overlay"></div>
-  </div><!-- #page -->  
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
 
-
-    <script id="dsq-count-scr" src="//lucasgatsas.disqus.com/count.js" async></script>
-
-  </body>
+</body>
 
 </html>
