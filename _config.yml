@@ -4,7 +4,7 @@ SEOTitle: 我的博客 | azx1
 header-img: img/home-bg.jpg
 email: 1395086733@qq.com
 description: "一起发现更大的世界 | 分享"
-keyword: "azx1,azx1's blog, azx1的博客，博客，个人博客，blog"
+keyword: "azx1,azx1's blog, azx1的博客"
 url: "http://azx1.github.io"              # your host, for absolute URL
 baseurl: ""         # for example, '/blog' if your blog hosted on 'host/blog'
 
