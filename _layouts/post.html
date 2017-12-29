@@ -49,9 +49,9 @@ layout: default
 
 				<!-- 转载信息 -->
 				 <hr>
-                {% if page.reprint%}
+                {% if page.reprint-link%}
                 <div style="border:3px solid #a1a1a1;border-radius:25px;-moz-border-radius:25px;box-shadow: 10px 10px 5px #888888;text-align:center;">
-                	<p>转载自：<b>{{page.author}}</b> 的 <a href="{{page.reprint}}">{{page.title}}</a>  访问原文可获取更多信息
+                	<p>转载自：<b>{% if page.author-link %}<a target="view_window" href="{{ page.author-link }}">{{page.author}}</a>{% else %}{{page.author}}{% endif %}</b><br>原文链接：<a target="view_window" href="{{page.reprint-link}}">{{page.reprint-link}}</a> 
                 	</p>
                 </div>
                 <hr>
