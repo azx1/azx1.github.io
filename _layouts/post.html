@@ -47,9 +47,21 @@ layout: default
                 col-md-10 col-md-offset-1
                 post-container">
 
+				<!-- 转载信息 -->
+				 <hr>
+                {% if page.reprint%}
+                <div style="border:3px solid;border-radius:25px;-moz-border-radius:25px;box-shadow: 10px 10px 5px #888888;text-align:center;">
+                	<p>转载自：<b>{{page.author}}</b> 的 <a href="{{page.reprint}}">{{page.title}}</a>  访问原文可获取更多信息
+                	</p>
+                </div>
+              
+                {% endif %}
+				<!-- 转载信息 -->
+
 				{{ content }}
 
                 <hr>
+		
 
                 {% if site.duoshuo_share && site.duoshuo_username %}
                 <!-- 多说 Share start -->
@@ -150,6 +162,7 @@ layout: default
         </div>
     </div>
 </article>
+
 
 {% if site.duoshuo_username %}
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
