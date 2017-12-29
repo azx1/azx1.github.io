@@ -5,8 +5,8 @@
     <description>一起发现更大的世界 | 分享</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 29 Dec 2017 17:05:39 +0800</pubDate>
-    <lastBuildDate>Fri, 29 Dec 2017 17:05:39 +0800</lastBuildDate>
+    <pubDate>Fri, 29 Dec 2017 17:56:31 +0800</pubDate>
+    <lastBuildDate>Fri, 29 Dec 2017 17:56:31 +0800</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
     
       <item>
@@ -39,6 +39,146 @@
         <category>sublime text3</category>
         
         <category>插件</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>解决invalid byte sequence in GBK</title>
+        <description>&lt;div id=&quot;article_content&quot; class=&quot;article_content csdn-tracking-statistics tracking-click&quot; data-mod=&quot;popu_519&quot; data-dsm=&quot;post&quot;&gt;
+                        
+&lt;p&gt;&lt;span style=&quot;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:16px;&quot;&gt;在post.html模板里面加入中文之后，&lt;/span&gt;&lt;code style=&quot;padding:2px 4px;font-family:Monaco, Menlo, Consolas, 'Courier New', monospace;font-size:12px;color:rgb(221,17,68);background-color:rgb(247,247,249);border:1px solid rgb(225,225,232);white-space:nowrap;&quot;&gt;jekyll
+ server&lt;/code&gt;&lt;span style=&quot;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:16px;&quot;&gt;命令直接报错。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&quot;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:16px;&quot;&gt;&lt;br /&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&quot;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:16px;&quot;&gt;解决办法是在运行服务器前先运行&lt;/span&gt;&lt;code style=&quot;padding:2px 4px;font-family:Monaco, Menlo, Consolas, 'Courier New', monospace;font-size:12px;color:rgb(221,17,68);background-color:rgb(247,247,249);border:1px solid rgb(225,225,232);white-space:nowrap;&quot;&gt;chcp
+ 65001&lt;/code&gt;&lt;span style=&quot;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:16px;&quot;&gt;命令，即可解决。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&quot;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:16px;&quot;&gt;&lt;br /&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&quot;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:16px;&quot;&gt;在官方找到的解决办法&lt;/span&gt;&lt;span style=&quot;color:rgb(85,85,85);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:16px;&quot;&gt;Windows users: run chcp
+ 65001 first to change the command prompt's character encoding (code page) to UTF-8 so Jekyll runs without errors.&lt;/span&gt;&lt;/p&gt;
+                    &lt;/div&gt;
+</description>
+        <pubDate>Fri, 29 Dec 2017 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2017/12/29/17-50-posts/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/12/29/17-50-posts/</guid>
+        
+        <category>jekyll</category>
+        
+        <category>问题</category>
+        
+        <category>转载</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>整死你个妖精，CDN西游捉妖记！</title>
+        <description>&lt;section class=&quot;news-content&quot;&gt;
+&lt;div class=&quot;abstract&quot;&gt;
+摘要：CDN撕B降价潮后，一起来看大圣归来捉妖记！
+&lt;/div&gt;
+&lt;p class=&quot;text&quot;&gt;CDN的降价潮和撕逼季已过，终于轮到小黑羊来做个科普啦。&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;这事儿，要从西游记取经开始……&lt;/p&gt;
+&lt;p class=&quot;image&quot;&gt;&lt;img src=&quot;http://b.hiphotos.baidu.com/news/w%3D638/sign=ce4c43041930e924cfa49f3274086e66/42166d224f4a20a48f6762cb96529822720ed045.jpg&quot; /&gt;&lt;/p&gt;&lt;p class=&quot;text&quot;&gt;[本图来自肖传湛个人网站：www.moko.cc/hiyoko]&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;1300年前，唐僧师徒取经要跋涉十万八千里，历经九九八十一难，一路打怪升级，最终才能修成正果，悟空加冕“斗战胜佛”。&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;1300年后，西游互联网已经开通，雷音寺官网上线，取经只需打开网站，点击下载，凡夫俗子也可以轻易取得真经。&lt;/p&gt;
+&lt;p class=&quot;image&quot;&gt;&lt;img src=&quot;http://e.hiphotos.baidu.com/news/w%3D638/sign=f9b8b82708f41bd5da53ebf769db81a0/a50f4bfbfbedab6487e912ccf136afc379311e26.jpg&quot; /&gt;&lt;/p&gt;&lt;p class=&quot;text&quot;&gt;初时，唐僧师徒觉得当年的辛苦付出颇为不值，慨叹世事变迁，法术高强敌不过科技进步。&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;然四大部洲善男信女众多，扎堆前往雷音寺官网下载经书，网站不堪重负，信徒叫苦不迭，神通广大的如来使出“Scacleup+Scaleout”心法，扩容雷音官网，仍不得其解，遂差遣悟空一查究竟。&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;悟空火眼金睛，半晌就把原因查了个一清二楚，原来信徒要想美美的访问雷音网，需要打败四个妖怪：&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;第一怪，首里魔&lt;/p&gt;
+&lt;p class=&quot;image&quot;&gt;&lt;img src=&quot;http://h.hiphotos.baidu.com/news/w%3D638/sign=8691c024912bd40742c7d0fe43889e9c/b64543a98226cffc91a2e1bebf014a90f603ea36.jpg&quot; /&gt;&lt;/p&gt;&lt;p class=&quot;text&quot;&gt;“首里魔”又称“第一公里魔”，把持网站服务器接入西游互联网的路口带宽，这个带宽决定了能为信徒提供的访问速度和并发访问量。&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;第二怪，骨干精&lt;/p&gt;
+&lt;p class=&quot;image&quot;&gt;&lt;img src=&quot;http://b.hiphotos.baidu.com/news/w%3D638/sign=61e24e11d22a283443a6350863b4c92e/b3b7d0a20cf431adca541d354d36acaf2edd9833.jpg&quot; /&gt;&lt;/p&gt;&lt;p class=&quot;text&quot;&gt;“骨干精”藏于西游互联网的长途传输要道，出没于IDC、骨干网、城域网、接入网等洞穴，使用“时延”和“拥塞”两个妖术作法。&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;第三怪，互联妖&lt;/p&gt;
+&lt;p class=&quot;image&quot;&gt;&lt;img src=&quot;http://a.hiphotos.baidu.com/news/w%3D638/sign=5ff4c4ff7f310a55c424ddf78f444387/267f9e2f07082838b7f28218be99a9014c08f13b.jpg&quot; /&gt;&lt;/p&gt;&lt;p class=&quot;text&quot;&gt;西游互联网覆盖四大部洲，各部洲的网络独立运营，“互联妖”善于挑拨离间，让洲与洲之间的互联带宽成为瓶颈。&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;第四怪，末里兽&lt;/p&gt;
+&lt;p class=&quot;image&quot;&gt;&lt;img src=&quot;http://f.hiphotos.baidu.com/news/w%3D638/sign=43651fb1af773912c4268662c0188675/0bd162d9f2d3572ca4b9c5d08c13632762d0c367.jpg&quot; /&gt;&lt;/p&gt;&lt;p class=&quot;text&quot;&gt;“末里兽”又称“最后一公里兽”，蹲守在上网信徒的家门口，把持用户访问西游互联网的通路，收取买路钱，钱少只能走羊肠小道。&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;悟空看罢大怒，原来是这些妖孽作怪！&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;于是拔下一根毫毛，使出“CDN”大法，变作几百只小猴子，一声令下，每猴背熟一些经文，纷纷潜入到各大部洲的IDC山洞中，就近为善男信女们提供讲经服务，这些小猴子被俗称为“cache猴”。&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;小猴子们基于这样的规则干活：&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;A．当某个信徒需要阅读经书，大家就挑选能最快到达信徒家的猴子前去讲经（可能距离最近，也可能是路最好走）；&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;B．如果某部经书被很多信徒需要，它就会被距离这些信徒最近的小猴子烂熟于心。&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;可是猴子很多又生性顽劣，管好还是很费神的，于是悟空叫来了师父和师弟们帮忙，师徒同心，其利断金。&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;沙和尚任劳任怨，悟空让他承担“分发服务”：&lt;/p&gt;
+&lt;p class=&quot;image&quot;&gt;&lt;img src=&quot;http://c.hiphotos.baidu.com/news/w%3D638/sign=d8a369347df40ad115e4c4e06f2d1151/0df3d7ca7bcb0a4620c7d5356d63f6246a60afd1.jpg&quot; /&gt;&lt;/p&gt;&lt;p class=&quot;text&quot;&gt;老沙的主要职责是将经书内容从雷音寺中心向各部洲的“cache猴”推送和存储，承担实际的佛经流量全网分发工作和面向最终信徒的阅读请求服务。&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;猪八戒肠肥肚圆，悟空让他承担“负载均衡”&lt;/p&gt;
+&lt;p class=&quot;image&quot;&gt;&lt;img src=&quot;http://h.hiphotos.baidu.com/news/w%3D638/sign=cb26bd64cabf6c81f7372feb843fb1d7/738b4710b912c8fc946aafc1fa039245d6882124.jpg&quot; /&gt;&lt;/p&gt;&lt;p class=&quot;text&quot;&gt;八戒负责对所有发起阅经请求的信徒进行访问调度，确定提供给信徒的最终实际访问地址，告诉信徒那个小猴子最适合他。&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;唐三藏高瞻远瞩，悟空请他承担“运营管理”&lt;/p&gt;
+&lt;p class=&quot;image&quot;&gt;&lt;img src=&quot;http://a.hiphotos.baidu.com/news/w%3D638/sign=e8b63d01209759ee4a5063c88afb434e/d62a6059252dd42ac87858a7053b5bb5c9eab84d.jpg&quot; /&gt;&lt;/p&gt;&lt;p class=&quot;text&quot;&gt;唐僧负责对日常事务的监管、收支核算、团队状态的检查、分析，也承担与大客户--佛祖“疏通”关系等职责。&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;在师徒四人的通力合作下，四个妖怪被打败，如来佛祖的心病治愈了，天下苍生得以美美滴上网取经。&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;雷音寺赚得盆满钵满，不断推出新的服务，原来只有经书下载，现在可以在线浏览经书，还可以视频直播，观看佛祖在线讲经。&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;于是唐僧师徒的CDN服务从原来只提供文件传输加速服务，到后来增加为流媒体加速服务、网页浏览加速服务等等。&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;从此，天下再没有难取的经，悟空得到佛祖嘉奖，从“斗战胜佛”升级为“斗站胜佛”！&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;好了，西游记的故事讲完了，我们关于CDN的知识普及也就告一段落，按照旧例，接下来简单讲讲行业格局。&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;先上一张图看看CDN的发展史吧&amp;gt;&amp;gt;&lt;/p&gt;
+&lt;p class=&quot;image&quot;&gt;&lt;img src=&quot;http://b.hiphotos.baidu.com/news/w%3D638/sign=2d485d91cdef76093c0b9a9c16dca301/ae51f3deb48f8c54b5529c233c292df5e0fe7f3c.jpg&quot; /&gt;&lt;/p&gt;&lt;p class=&quot;text&quot;&gt;CDN发展史，本图根据雷葆华《CDN技术详解》修改&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;上半年CDN市场的乱战想必大家还历历在目，现在我们冷静下来，分析一下格局和阵营。&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;传统CDN商：固守大客户，稳坐钓鱼钩&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;蓝汛&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;蓝汛是中国第一家专业CDN服务商，成立于1998年，2010年10月1日登陆纳斯达克。目前蓝汛声称全球部署服务器超过17000台，为30000多家客户提供服务。目标客户分为互联网、政府/媒体、运营商和企业四类，服务类型也细分超过10种，也有针对中小客户的webluker自助平台。&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;不过蓝汛官网中竟然存在404错误，还是很令小黑羊意外的。&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;网宿&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;网宿科技成立与2000年，2009年10月30日，成为首批创业板上市公司。网宿声称全球部署服务器超过30000台，有500+CDN加速节点，其中海外节点超过30个。网宿细分了10个行业，并针对中小客户推出了cloudedge自助加速平台。蓝汛和网宿都自称为国内第一大，但具体谁更大，小黑羊也不清楚，需要资深人士解惑。&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;帝联&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;与前两大相比，上海帝联只能算作第二阵营，成立于05年，据传为网宿员工创建，在经历了电信通/鹏博士的07年收购与12年出让之后，帝联目前已经登陆新三板。&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;快网&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;北京快网据传也是网宿前员工在06年创立，2012年被世纪互联并购，快网除了主营的CDN业务之外，也在不断拓展新的方向，除了CDN的副产品TCP优化、智能DNS、正向cache之外，还有推出了一个“牛盾”安全SaaS应用，与百度安全宝神似。&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;云计算巨头：下雨天打孩子，闲着也是闲着&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;阿里云&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;云计算公司能提供CDN服务，这一点大家都不奇怪，但作为中国最大的公有云服务商，阿里云的产品线有几十条，会不会把CDN当成主力，倒是很让人怀疑，不过，利用资源优势把水搅浑，把价格杀下来，这事儿，阿里云已经在做了。&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;而除了价格之外阿里云最具杀伤力的还是把CDN和DDOS高防整合在一起的云层服务，为客户提供不怕DDOS的安全CDN服务。&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;腾讯云&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;腾讯CDN号称全球400+节点，10T带宽，最大的客户是自己的QQ和微信，的确是很吸引人的招牌，但估计首先被吸引的，还是已经架构在腾讯云上的移动APPs和游戏客户，而针对公众号的特色CDN服务算是个不错的礼包吧。&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;百度云&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;在BAT三巨头中，百度是最晚发力公有云的，但其实截至目前BCE上的产品也罗列了不少，CDN作为“闲置资源”拿出来发挥一下余热自然不会让人意外，只是与阿里、腾讯的存量云客户相比，百度CDN的目标客户似乎并不乐观。&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;互联网小鲜肉：把握新概念，寻求新增长&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;UPYUN&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;UPYUN，上半年CDN撕逼大战的挑起者。其实从去年下半年，他们就开始推800G流量赠送、流量和空间降价以及免费联盟，折腾了半年终于把这把火点着了，5月份又推一轮大幅降价，UPYUN俨然是一个专注CDN的互联网公司了，看他们的Slogan——“重新定义云加速”。不过，拼资源优势，自然比不过上面的传统豪强，所以，UPYUN在CDN服务中，增加了多媒体云端处理作为卖点。&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;迅雷星域&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;迅雷，大家都不陌生，星域，大家都不熟悉。谁也没想到在CDN的撕逼战的收官之际，迅雷联合小米，推出个无限节点CDN服务，听起来好怕怕。迅雷星域的杀手锏是在终端上布局，依托小米在“端”的布局能力，将迅雷核心技术拓展到边缘节点，解决最后一公里的加速问题。思路看起来振奋人心，也算是迅雷走出下载业务的一种破局，但是不可控因素也最多。&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;小黑羊吐槽：&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;在国内，很长一段时间CDN都是幕后英雄，默默地扮演着互联网&quot;快递员&quot;的角色，上半年的大乱战终于让CDN从幕后走到台前，眼下，大战还在继续：&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;吃惯了肉的传统CDN服务商还可以继续吃肉，虽然霸主地位不可撼动，但已经无法像以往那样挑肥拣瘦。&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;BAT们即使一直在喝汤，心里也不至于很悲伤，反正是闲置资源发挥余热，没准还能抢到一块肥肉呢。&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;互联网小鲜肉们要的是新增长、新思路、新概念，找到干爹最要紧，至于是肉还是汤，谁管呢？&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;本文部分技术内容参考了雷葆华等编著的《CDN技术详解》一书，特此鸣谢。&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;以上为本期小黑羊黑技术的全部，下期再见。&lt;/p&gt;
+&lt;p class=&quot;text&quot;&gt;&lt;/p&gt;
+
+&lt;div class=&quot;rights&quot;&gt;
+&lt;div class=&quot;rights-title&quot;&gt;版权声明&lt;/div&gt;
+&lt;div class=&quot;instructions&quot;&gt;
+本文仅代表作者观点，不代表百度立场。&lt;br /&gt;本文系作者授权百度百家发表，未经许可，不得转载。&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;read-like&quot;&gt;
+&lt;div class=&quot;read&quot;&gt;阅读量：&lt;span class=&quot;read-amount&quot;&gt;
+281
+&lt;/span&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+</description>
+        <pubDate>Fri, 29 Dec 2017 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2017/12/29/17-33-posts/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/12/29/17-33-posts/</guid>
+        
+        <category>CDN</category>
+        
+        <category>转载</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>什么是CDN？</title>
+        <description>&lt;div class=&quot;RichContent-inner&quot; data-reactid=&quot;223&quot;&gt;&lt;span class=&quot;RichText CopyrightRichText-richText&quot; itemprop=&quot;text&quot; data-reactid=&quot;224&quot;&gt;&lt;p&gt;&lt;b&gt;CDN&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;全称&lt;/b&gt;:Content Delivery Network或Content Ddistribute Network，即内容分发网络&lt;/p&gt;&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;基本思路&lt;/b&gt;：&lt;/p&gt;&lt;p&gt;尽可能避开互联网上有可能影响数据传输速度和稳定性的瓶颈和环节，使内容传输的更快、更稳定。通过在网络各处放置节点服务器所构成的在现有的互联网基础之上的一层智能虚拟网络，CDN系统能够实时地根据网络流量和各节点的连接、负载状况以及到用户的距离和响应时间等综合信息将用户的请求重新导向离用户最近的服务节点上。&lt;/p&gt;&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;目的&lt;/b&gt;：&lt;/p&gt;&lt;p&gt;解决因分布、带宽、服务器性能带来的访问延迟问题，适用于站点加速、点播、直播等场景。使用户可就近取得所需内容，解决 Internet网络拥挤的状况，提高用户访问网站的响应速度和成功率。&lt;/p&gt;&lt;p&gt;控制时延无疑是现代信息科技的重要指标，CDN的意图就是尽可能的减少资源在转发、传输、链路抖动等情况下顺利保障信息的连贯性。&lt;/p&gt;&lt;p&gt;CDN就是扮演者护航者和加速者的角色，更快准狠的触发信息和触达每一个用户，带来更为极致的使用体验。&lt;br /&gt;再通俗点说就是在网速一定的前提下，CDN就像网络中快递员小哥&lt;/p&gt;&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&lt;figure&gt;&lt;noscript&gt;&amp;lt;img src=&quot;https://pic3.zhimg.com/50/v2-35eeda954a433e794e89b012dfad7231_hd.jpg&quot; data-rawwidth=&quot;627&quot; data-rawheight=&quot;418&quot; class=&quot;origin_image zh-lightbox-thumb&quot; width=&quot;627&quot; data-original=&quot;https://pic3.zhimg.com/v2-35eeda954a433e794e89b012dfad7231_r.jpg&quot;&amp;gt;&lt;/noscript&gt;&lt;img src=&quot;https://pic3.zhimg.com/50/v2-35eeda954a433e794e89b012dfad7231_hd.jpg&quot; data-rawwidth=&quot;627&quot; data-rawheight=&quot;418&quot; class=&quot;origin_image zh-lightbox-thumb lazy&quot; width=&quot;627&quot; data-original=&quot;https://pic3.zhimg.com/v2-35eeda954a433e794e89b012dfad7231_r.jpg&quot; data-actualsrc=&quot;https://pic3.zhimg.com/50/v2-35eeda954a433e794e89b012dfad7231_hd.jpg&quot; /&gt;&lt;/figure&gt;&lt;p&gt;而且CDN这个快递员很是聪明&lt;br /&gt;TA不是在用蛮力瞎跑、乱撞&lt;/p&gt;&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&lt;figure&gt;&lt;noscript&gt;&amp;lt;img src=&quot;https://pic2.zhimg.com/50/v2-f4c28608e1c61728d7e905162ab664cc_hd.gif&quot; data-rawwidth=&quot;600&quot; data-rawheight=&quot;424&quot; data-thumbnail=&quot;https://pic2.zhimg.com/50/v2-f4c28608e1c61728d7e905162ab664cc_hd.jpg&quot; class=&quot;origin_image zh-lightbox-thumb&quot; width=&quot;600&quot; data-original=&quot;https://pic2.zhimg.com/v2-f4c28608e1c61728d7e905162ab664cc_r.gif&quot;&amp;gt;&lt;/noscript&gt;&lt;div class=&quot;RichText-gifPlaceholder&quot;&gt;&lt;div data-reactroot=&quot;&quot; class=&quot;GifPlayer&quot; data-za-detail-view-path-module=&quot;GifItem&quot;&gt;&lt;img class=&quot;column-gif&quot; role=&quot;presentation&quot; src=&quot;https://pic2.zhimg.com/50/v2-f4c28608e1c61728d7e905162ab664cc_hd.jpg&quot; data-thumbnail=&quot;https://pic2.zhimg.com/50/v2-f4c28608e1c61728d7e905162ab664cc_hd.jpg&quot; /&gt;&lt;/div&gt;&lt;/div&gt;&lt;/figure&gt;&lt;p&gt;TA还承建了很多家快递点，就近快递(缓存)&lt;/p&gt;&lt;p&gt;TA善于优化快递路径(调度)&lt;br /&gt;还会对包裹进行更合理的重新打包(协议优化)&lt;/p&gt;&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;基础架构：&lt;/b&gt;最简单的CDN网络由一个DNS服务器和几台缓存服务器组成：&lt;/p&gt;&lt;ol&gt;&lt;li&gt;当用户点击网站页面上的内容URL，经过本地DNS系统解析，DNS系统会最终将域名的解析权交给CNAME指向的CDN专用DNS服务器。&lt;/li&gt;&lt;li&gt;CDN的DNS服务器将CDN的全局负载均衡设备IP地址返回用户。&lt;/li&gt;&lt;li&gt;用户向CDN的全局负载均衡设备发起内容URL访问请求。&lt;/li&gt;&lt;li&gt;CDN全局负载均衡设备根据用户IP地址，以及用户请求的内容URL，选择一台用户所属区域的区域负载均衡设备，告诉用户向这台设备发起请求。&lt;/li&gt;&lt;li&gt;区域负载均衡设备会为用户选择一台合适的缓存服务器提供服务，选择的依据包括：根据用户IP地址，判断哪一台服务器距用户最近；根据用户所请求的URL中携带的内容名称，判断哪一台服务器上有用户所需内容；查询各个服务器当前的负载情况，判断哪一台服务器尚有服务能力。基于以上这些条件的综合分析之后，区域负载均衡设备会向全局负载均衡设备返回一台缓存服务器的IP地址。&lt;/li&gt;&lt;li&gt;全局负载均衡设备把服务器的IP地址返回给用户。&lt;/li&gt;&lt;li&gt;用户向缓存服务器发起请求，缓存服务器响应用户请求，将用户所需内容传送到用户终端。如果这台缓存服务器上并没有用户想要的内容，而区域均衡设备依然将它分配给了用户，那么这台服务器就要向它的上一级缓存服务器请求内容，直至追溯到网站的源服务器将内容拉到本地。&lt;/li&gt;&lt;/ol&gt;&lt;figure&gt;&lt;noscript&gt;&amp;lt;img src=&quot;https://pic3.zhimg.com/50/v2-5793aec83fc645e002a1cd70ab7209a3_hd.jpg&quot; data-rawwidth=&quot;600&quot; data-rawheight=&quot;344&quot; class=&quot;origin_image zh-lightbox-thumb&quot; width=&quot;600&quot; data-original=&quot;https://pic3.zhimg.com/v2-5793aec83fc645e002a1cd70ab7209a3_r.jpg&quot;&amp;gt;&lt;/noscript&gt;&lt;img src=&quot;https://pic3.zhimg.com/50/v2-5793aec83fc645e002a1cd70ab7209a3_hd.jpg&quot; data-rawwidth=&quot;600&quot; data-rawheight=&quot;344&quot; class=&quot;origin_image zh-lightbox-thumb lazy&quot; width=&quot;600&quot; data-original=&quot;https://pic3.zhimg.com/v2-5793aec83fc645e002a1cd70ab7209a3_r.jpg&quot; data-actualsrc=&quot;https://pic3.zhimg.com/50/v2-5793aec83fc645e002a1cd70ab7209a3_hd.jpg&quot; /&gt;&lt;/figure&gt;&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;服务模式：&lt;/b&gt;&lt;/p&gt;&lt;p&gt;简单地说，CDN是一个经策略性部署的整体系统，包括分布式存储、负载均衡、网络请求的重定向和内容管理4个要件，而内容管理和全局的网络流量管理(Traffic Management)是CDN的核心所在。&lt;/p&gt;&lt;p&gt;通过用户就近性和服务器负载的判断，CDN确保内容以一种极为高效的方式为用户的请求提供服务。&lt;/p&gt;&lt;p&gt;&lt;b&gt;举例说明：&lt;/b&gt;&lt;/p&gt;&lt;p&gt;国内访问量较高的网站、直播、视频平台，均使用CDN网络加速技术，虽然网站的访问巨大，但无论在什么地方访问都会感觉速度很快。而一般的网站如果服务器在网通，电信用户访问很慢，如果服务器在电信，网通用户访问又很慢。&lt;/p&gt;&lt;p&gt;通过在现有的Internet中增加一层新的网络架构，将网站的内容发布到最接近用户的cache服务器内，通过DNS负载均衡的技术，判断用户来源就近访问cache服务器取得所需的内容，解决Internet网络拥塞状况，提高用户访问网站的响应速度，如同提供了多个分布在各地的加速器，以达到快速、可冗余的为多个网站加速的目的。&lt;/p&gt;&lt;p&gt;CDN服务最初用于确保快速可靠地分发静态内容，这些内容可以缓存，最适合在网速庞大的网络中存储和分发，该网络在几十多个国家的十几个网络中的覆盖CDN网络服务器。由于动态内容必须通过互联网来传输，因此要提供快速的网络体验。如今的CDN可谓是大文件、小文件、点播、直播、动静皆宜！&lt;/p&gt;&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&lt;figure&gt;&lt;noscript&gt;&amp;lt;img src=&quot;https://pic3.zhimg.com/50/v2-9b12ed731f01f8425c688bb13e0d913e_hd.jpg&quot; data-rawwidth=&quot;640&quot; data-rawheight=&quot;427&quot; class=&quot;origin_image zh-lightbox-thumb&quot; width=&quot;640&quot; data-original=&quot;https://pic3.zhimg.com/v2-9b12ed731f01f8425c688bb13e0d913e_r.jpg&quot;&amp;gt;&lt;/noscript&gt;&lt;img src=&quot;https://pic3.zhimg.com/50/v2-9b12ed731f01f8425c688bb13e0d913e_hd.jpg&quot; data-rawwidth=&quot;640&quot; data-rawheight=&quot;427&quot; class=&quot;origin_image zh-lightbox-thumb lazy&quot; width=&quot;640&quot; data-original=&quot;https://pic3.zhimg.com/v2-9b12ed731f01f8425c688bb13e0d913e_r.jpg&quot; data-actualsrc=&quot;https://pic3.zhimg.com/50/v2-9b12ed731f01f8425c688bb13e0d913e_hd.jpg&quot; /&gt;&lt;/figure&gt;&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;主要特点：&lt;/b&gt;&lt;/p&gt;&lt;p&gt;1、本地Cache加速，提高了企业站点（尤其含有大量图片和静态页面站点）的访问速度，并大大提高以上性质站点的稳定性&lt;/p&gt;&lt;p&gt;2、镜像服务消除了不同运营商之间互联的瓶颈造成的影响，实现了跨运营商的网络加速，保证不同网络中的用户都能得到良好的访问质量。&lt;/p&gt;&lt;p&gt;3、远程加速 远程访问用户根据DNS负载均衡技术 智能自动选择Cache服务器，选择最快的Cache服务器，加快远程访问的速度&lt;/p&gt;&lt;p&gt;4、带宽优化 自动生成服务器的远程Mirror（镜像）cache服务器，远程用户访问时从cache服务器上读取数据，减少远程访问的带宽、分担网络流量、减轻原站点WEB服务器负载等功能。&lt;/p&gt;&lt;p&gt;5、集群抗攻击 广泛分布的CDN节点加上节点之间的智能冗余机制，可以有效地预防黑客入侵以及降低各种D.D.o.S攻击对网站的影响，同时保证较好的服务质量 。&lt;/p&gt;&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;关键技术：&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&lt;figure&gt;&lt;noscript&gt;&amp;lt;img src=&quot;https://pic4.zhimg.com/50/v2-eaf80abf6a52913375d2ade0dde79ed0_hd.jpg&quot; data-rawwidth=&quot;640&quot; data-rawheight=&quot;467&quot; class=&quot;origin_image zh-lightbox-thumb&quot; width=&quot;640&quot; data-original=&quot;https://pic4.zhimg.com/v2-eaf80abf6a52913375d2ade0dde79ed0_r.jpg&quot;&amp;gt;&lt;/noscript&gt;&lt;img src=&quot;https://pic4.zhimg.com/50/v2-eaf80abf6a52913375d2ade0dde79ed0_hd.jpg&quot; data-rawwidth=&quot;640&quot; data-rawheight=&quot;467&quot; class=&quot;origin_image zh-lightbox-thumb lazy&quot; width=&quot;640&quot; data-original=&quot;https://pic4.zhimg.com/v2-eaf80abf6a52913375d2ade0dde79ed0_r.jpg&quot; data-actualsrc=&quot;https://pic4.zhimg.com/50/v2-eaf80abf6a52913375d2ade0dde79ed0_hd.jpg&quot; /&gt;&lt;/figure&gt;&lt;p&gt;内容发布：它借助于建立索引、缓存、流分裂、组播（Multicast）等技术&lt;/p&gt;&lt;p&gt;内容路由：它是整体性的网络负载均衡技术，通过内容路由器中的重定向（DNS）机制，在多个远程POP上均衡用户的请求，以使用户请求得到最近内容源的响应；&lt;/p&gt;&lt;p&gt;内容交换：它根据内容的可用性、服务器的可用性以及用户的背景，在POP的缓存服务器上，利用应用层交换、流分裂、重定向（ICP、WCCP）等技术，智能地平衡负载流量；&lt;/p&gt;&lt;p&gt;性能管理：它通过内部和外部监控系统，获取网络部件的状况信息，测量内容发布的端到端性能（如包丢失、延时、平均带宽、启动时间、帧速率等），保证网络处于最佳的运行状态。&lt;/p&gt;&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;适用范围：&lt;/b&gt;&lt;/p&gt;&lt;figure&gt;&lt;noscript&gt;&amp;lt;img src=&quot;https://pic1.zhimg.com/50/v2-3cb264b4b37a79bdcd27afcbdf34b0e8_hd.jpg&quot; data-rawwidth=&quot;640&quot; data-rawheight=&quot;269&quot; class=&quot;origin_image zh-lightbox-thumb&quot; width=&quot;640&quot; data-original=&quot;https://pic1.zhimg.com/v2-3cb264b4b37a79bdcd27afcbdf34b0e8_r.jpg&quot;&amp;gt;&lt;/noscript&gt;&lt;img src=&quot;https://pic1.zhimg.com/50/v2-3cb264b4b37a79bdcd27afcbdf34b0e8_hd.jpg&quot; data-rawwidth=&quot;640&quot; data-rawheight=&quot;269&quot; class=&quot;origin_image zh-lightbox-thumb lazy&quot; width=&quot;640&quot; data-original=&quot;https://pic1.zhimg.com/v2-3cb264b4b37a79bdcd27afcbdf34b0e8_r.jpg&quot; data-actualsrc=&quot;https://pic1.zhimg.com/50/v2-3cb264b4b37a79bdcd27afcbdf34b0e8_hd.jpg&quot; /&gt;&lt;/figure&gt;&lt;p&gt;&lt;b&gt;一般来说以资讯、内容等为主的网站，具有一定访问体量的网站&lt;/b&gt;&lt;/p&gt;&lt;p&gt;例如资讯网站、政府机构网站、行业平台网站、商城等以动态内容为主的网站&lt;/p&gt;&lt;p&gt;例如论坛、博客、交友、SNS、网络游戏、搜索/查询、金融等。提供http下载的网站&lt;/p&gt;&lt;p&gt;例如软件开发商、内容服务提供商、网络游戏运行商、源码下载等有大量流媒体点播应用的网站&lt;/p&gt;&lt;p&gt;例如：拥有视频点播平台的电信运营商、内容服务提供商、体育频道、宽频频道、在线教育、视频博客等&lt;/p&gt;&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&lt;h2&gt;&lt;b&gt;&lt;i&gt;Q &amp;amp; A&lt;/i&gt;&lt;/b&gt;&lt;/h2&gt;&lt;p&gt;&lt;b&gt;1.CDN加速是对网站所在服务器加速，还是对其域名加速？&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;i&gt;CDN是只对网站的某一个具体的域名加速。如果同一个网站有多个域名，则访客访问加入CDN的域名获得加速效果，访问未加入CDN的域名，或者直接访问IP地址，则无法获得CDN效果。&lt;/i&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;2.CDN和镜像站点比较有何优势？　　&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;i&gt;CDN对网站的访客完全透明，不需要访客手动选择要访问的镜像站点，保证了网站对访客的友好性。　　&lt;br /&gt;CDN对每个节点都有可用性检查，不合格的节点会第一时间剔出，从而保证了极高的可用率，而镜像站点无法实现这一点。　　&lt;br /&gt;CDN部署简单，对原站基本不做任何改动即可生效。&lt;/i&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;3.CDN和双线机房相比有何优势？&lt;/b&gt; &lt;/p&gt;&lt;p&gt;&lt;i&gt;常见的双线机房只能解决网通和电信互相访问慢的问题，其它ISP（譬如教育网，移动网，铁通）互通的问题还是没得到解决。　　&lt;br /&gt;而CDN是访问者就近取数据，而CDN的节点遍布各ISP，从而保证了网站到任意ISP的访问速度。另外CDN因为其流量分流到各节点的原理，天然获得抵抗网络攻击的能力。&lt;/i&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;4.CDN使用后，原来的网站是否需要做修改，做什么修改？&lt;/b&gt; &lt;/p&gt;&lt;p&gt;&lt;i&gt;一般而言，网站无需任何修改即可使用CDN获得加速效果。只是对需要判断访客IP程序，才需要做少量修改。&lt;/i&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;5.为什么我的网站更新后，通过CDN后看到网页还是旧网页，如何解决？　　&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;i&gt;由于CDN采用各节点缓存的机制，网站的静态网页和图片修改后，如果CDN缓存没有做相应更新，则看到的还是旧的网页。&lt;br /&gt;为了解决这个问题，CDN管理面板中提供了URL推送服务，来通知CDN各节点刷新自己的缓存。　　&lt;br /&gt;在URL推送地址栏中，输入具体的网址或者图片地址，则各节点中的缓存内容即被统一删除，并且当即生效。　　&lt;br /&gt;如果需要推送的网址和图片太多，可以选择目录推送，输入 &lt;a href=&quot;https://link.zhihu.com/?target=http%3A//www.kkk.com/news&quot; class=&quot; external&quot; target=&quot;_blank&quot; rel=&quot;nofollow noreferrer&quot;&gt;&lt;span class=&quot;invisible&quot;&gt;http://www.&lt;/span&gt;&lt;span class=&quot;visible&quot;&gt;kkk.com/news&lt;/span&gt;&lt;span class=&quot;invisible&quot;&gt;&lt;/span&gt;&lt;/a&gt; 即可以对网站下news目录下所有网页和图片进行了刷新。&lt;/i&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;6.能不能让CDN不缓存某些即时性要求很高的网页和图片？&lt;/b&gt; &lt;/p&gt;&lt;p&gt;&lt;i&gt;只需要使用动态页面，asp，php，jsp等动态技术做成的页面不被CDN缓存，无需每次都要刷新。或者采用一个网站两个域名，一个启用CDN，另外一个域名不用CDN，对即时性要求高的页面和图片放在不用CDN的域名下。&lt;/i&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;7.网站新增了不少网页和图片，这些需要使用URL推送吗？　　&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;i&gt;后来增加的网页和图片，不需要使用URL推送，因为它们本来就不存在缓存中。&lt;/i&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;8.网站用CDN后，有些地区反映无法访问了，怎么办？&lt;/b&gt; &lt;/p&gt;&lt;p&gt;&lt;i&gt;CDN启用后，访客不能访问网站有很多种可能，可能是CDN的问题，也可能是源站点出现故障或者源站点被关闭，还可能是访客自己所在的网络出现问题，甚至我们实际故障排除中，还出现过客户自己计算机中毒，导致无法访问网站。　　&lt;br /&gt;客户报告故障时，可随时联系我们24小时技术部进行处理。&lt;/i&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;9.哪些情况不适用于CDN?&lt;/b&gt;&lt;/p&gt;&lt;figure&gt;&lt;noscript&gt;&amp;lt;img src=&quot;https://pic1.zhimg.com/50/v2-3cb264b4b37a79bdcd27afcbdf34b0e8_hd.jpg&quot; data-rawwidth=&quot;640&quot; data-rawheight=&quot;269&quot; class=&quot;origin_image zh-lightbox-thumb&quot; width=&quot;640&quot; data-original=&quot;https://pic1.zhimg.com/v2-3cb264b4b37a79bdcd27afcbdf34b0e8_r.jpg&quot;&amp;gt;&lt;/noscript&gt;&lt;img src=&quot;https://pic1.zhimg.com/50/v2-3cb264b4b37a79bdcd27afcbdf34b0e8_hd.jpg&quot; data-rawwidth=&quot;640&quot; data-rawheight=&quot;269&quot; class=&quot;origin_image zh-lightbox-thumb lazy&quot; width=&quot;640&quot; data-original=&quot;https://pic1.zhimg.com/v2-3cb264b4b37a79bdcd27afcbdf34b0e8_r.jpg&quot; data-actualsrc=&quot;https://pic1.zhimg.com/50/v2-3cb264b4b37a79bdcd27afcbdf34b0e8_hd.jpg&quot; /&gt;&lt;/figure&gt;&lt;p&gt;&lt;b&gt;备注：此类极端状况不建议您使用CDN服务&lt;/b&gt;&lt;/p&gt;&lt;/span&gt;&lt;!-- react-empty: 225 --&gt;&lt;/div&gt;
+</description>
+        <pubDate>Fri, 29 Dec 2017 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2017/12/29/17-27-posts/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/12/29/17-27-posts/</guid>
+        
+        <category>CDN</category>
+        
+        <category>转载</category>
         
         
       </item>

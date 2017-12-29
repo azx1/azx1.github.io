@@ -82,19 +82,16 @@ featured-condition-size: 1              # A tag will be featured if the size of 
 # Friends
 friends: [
     {
-        title: "Hux Blog",
-        href: "http://huangxuan.me"
+        title: "Unity manual",
+        href: "https://docs.unity3d.com/Manual/UnityManual.html"
     },{
-        title: "Foo",
-        href: "#"
+        title: "Bootstrap中文网",
+        href: "http://www.bootcss.com/"
     },{
-        title: "Bar",
-        href: "#"
+        title: "Liquid手册",
+        href: "https://liquid.bootcss.com/"
     },{
-        title: "Example Friends",
-        href: "#"
-    },{
-        title: "It helps SEO",
-        href: "#"
-    }
+        title: "日食记",
+        href: "https://h5.youzan.com/v2/showcase/mpnews?alias=YZvuLIHdnh&sf=wx_menu"
+    },
 ]
