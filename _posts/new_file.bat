@@ -7,5 +7,6 @@ set fen=%time:~3,2%
 if "%date:~5,1%"==" " set mm=%mm: =0%
 if "%date:~8,1%"==" " set dd=%dd: =0%
 if "%time:~0,1%"==" " set shi=%shi: =0%
-echo >%yy%-%mm%-%dd%-%shi%-%fen%-posts.md
+set datefile=%yy%-%mm%-%dd%-%shi%-%fen%-posts
+echo >%datefile%.md
 type  %~sdp0\head.txt>%yy%-%mm%-%dd%-%shi%-%fen%-posts.md
