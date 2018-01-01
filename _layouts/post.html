@@ -50,6 +50,7 @@ layout: default
 				<!-- 转载信息 -->
 				 
                 {% if page.reprint-link%}
+                <hr />
                 <div class="reprint">
                 	<p>转载自：<b>{% if page.author-link %}<a target="view_window" href="{{ page.author-link }}">{{page.author}}</a>{% else %}{{page.author}}{% endif %}</b><br>原文链接：<a target="view_window" href="{{page.reprint-link}}">{{page.reprint-link}}</a> 
                 	</p>
@@ -59,6 +60,8 @@ layout: default
 				<!-- 转载信息 -->
 
 				{{ content }}
+
+				<hr />
 		
 
                 {% if site.duoshuo_share && site.duoshuo_username %}
@@ -90,17 +93,19 @@ layout: default
                 <ul class="pager">
                     {% if page.previous.url %}
                     <li class="previous">
-                        <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}">&larr; 上一篇</a>
+                        <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}">上一篇</a>
                     </li>
                     {% endif %}
                     {% if page.next.url %}
                     <li class="next">
-                        <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">下一篇 &rarr;</a>
+                        <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">下一篇</a>
                     </li>
                     {% endif %}
 
                 </ul>
+                {% if page.previous.url||page.next.url%}
                 <hr />
+                {% endif %}
 
 
                 {% if site.duoshuo_username %}
