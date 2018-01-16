@@ -9,7 +9,21 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ site.baseurl }}/">{{ site.nav-title }}</a>
+            <a href="" class="navbar-brand 
+                    {% if site.brand-animation %}
+                       {% if site.brand-animation-type %}
+                           {{ site.brand-animation-type }} {{ site.brand-animation }}
+                        {% else %}
+                           animated {{ site.brand-animation }}
+                        {% endif %}
+                    {% endif  %}">
+                    <span class="
+                        {% if site.brand-icon-type %}
+                                {{ site.brand-icon-type }} {{ site.brand-icon-type }}-{{ site.brand-icon }}
+                        {% else %}
+                                glyphicon glyphicon-{{ site.brand-icon }}
+                        {% endif %}"></span>&nbsp;{{ site.brand-title }}
+            </a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -21,14 +35,23 @@
         <div id="customize_navbar">
             <div class="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="{{ site.baseurl }}/">主页</a>
-                    </li>
-                    {% for page in site.pages %}{% if page.title %}
-                    <li>
-                        <a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
-                    </li>
-                    {% endif %}{% endfor %}
+                   {% for page in site.pages %}
+                    {% if page.title %}
+                        <li>
+                            <a href="{{ page.url | prepend:site.baseurl }}">
+                                {% if page.icon %}
+                                    <span class=" 
+                                    {% if page.icon-type %}
+                                         {{ page.icon-type }} {{ page.icon-type }}-{{ page.icon }}
+                                    {% else %}
+                                        glyphicon glyphicon-{{ page.icon }}
+                                    {% endif %}"></span>
+                                {% endif %} 
+                                &nbsp;{{ page.title }}
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% endfor %}
                 </ul>
             </div>
         </div>
@@ -36,6 +59,7 @@
     </div>
     <!-- /.container -->
 </nav>
+
 <script>
     // Drop Bootstarp low-performance Navbar
     // Use customize navbar with high-quality material design animation

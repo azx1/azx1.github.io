@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 
 <head>
     <meta charset="utf-8">
@@ -19,6 +19,9 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/customize.min.css"> 
+
+      <!-- animate CSS -->
+    <link rel="stylesheet" href="/css/animate.css">
 
     <!-- Pygments Github CSS -->
     <link rel="stylesheet" href="/css/syntax.css">
@@ -43,7 +46,17 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">__/\__/\__</a>
+            <a href="" class="navbar-brand 
+                    
+                       
+                           animated swing
+                        
+                    ">
+                    <span class="
+                        
+                                glyphicon glyphicon-knight
+                        "></span>&nbsp;azx1
+            </a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -55,17 +68,66 @@
         <div id="customize_navbar">
             <div class="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">主页</a>
-                    </li>
+                   
                     
-                    <li>
-                        <a href="/about/">博客信息</a>
-                    </li>
                     
-                    <li>
-                        <a href="/tags/">标签</a>
-                    </li>
+                    
+                        <li>
+                            <a href="/about/">
+                                
+                                    <span class=" 
+                                    
+                                        glyphicon glyphicon-paperclip
+                                    "></span>
+                                 
+                                &nbsp;博客信息
+                            </a>
+                        </li>
+                    
+                    
+                    
+                    
+                    
+                        <li>
+                            <a href="/">
+                                
+                                    <span class=" 
+                                    
+                                        glyphicon glyphicon-send
+                                    "></span>
+                                 
+                                &nbsp;文章
+                            </a>
+                        </li>
+                    
+                    
+                    
+                        <li>
+                            <a href="/tags/">
+                                
+                                    <span class=" 
+                                    
+                                        glyphicon glyphicon-tags
+                                    "></span>
+                                 
+                                &nbsp;标签
+                            </a>
+                        </li>
+                    
+                    
+                    
+                        <li>
+                            <a href="/page2/">
+                                
+                                    <span class=" 
+                                    
+                                        glyphicon glyphicon-send
+                                    "></span>
+                                 
+                                &nbsp;文章
+                            </a>
+                        </li>
+                    
                     
                 </ul>
             </div>
@@ -74,6 +136,7 @@
     </div>
     <!-- /.container -->
 </nav>
+
 <script>
     // Drop Bootstarp low-performance Navbar
     // Use customize navbar with high-quality material design animation
@@ -240,31 +303,24 @@
 
 <!-- Google Analytics -->
 
-<script>
-    // dynamic User by Hux
-    var _gaId = 'UA-111647702-1';
-    var _gaDomain = 'auto';
-
-    // Originial
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', _gaId, _gaDomain);
-    ga('send', 'pageview');
-</script>
-
 
 
 <!-- Baidu Tongji -->
 
 
+<!-- 鼠标悬停动画效果 -->
+<script>
+	$(function(){
+		$('#animation-title').mouseover(function(){
+				$(this).addClass("animated swing");
+		});
+		$('#animation-title').mouseleave(function(){
+					$('#animation-title').removeClass("animated swing")
+		});
+	});
+</script>
 
 
-<!-- Image to hack wechat -->
-<img src="/img/icon_wechat.png" width="0" height="0" />
-<!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>
 

@@ -6,8 +6,14 @@ email: 1395086733@qq.com
 description: "一起发现更大的世界 | 分享"
 keyword: "azx1,azx1's blog, azx1的博客"
 url: "http://azx1.github.io"              # your host, for absolute URL
-baseurl: ""         # for example, '/blog' if your blog hosted on 'host/blog'
-nav-title: __/\__/\__
+baseurl: ""         # for example, '/blog' if your blog hosted on 'host/blog
+
+#brand info
+brand-title: azx1
+brand-icon-type: glyphicon
+brand-icon: knight
+brand-animation-type: animated
+brand-animation: swing
 
 
 # SNS settings
@@ -61,8 +67,8 @@ kramdown:
 # Baidu Analytics
 #ba_track_id: a1983936ab86b3e9af8a801d2ea426c9
 # Google Analytics
-ga_track_id: 'UA-111647702-1'            # Format: UA-xxxxxx-xx
-ga_domain: auto
+#ga_track_id: 'UA-111647702-1'            # Format: UA-xxxxxx-xx
+#ga_domain: auto
 
 
 
