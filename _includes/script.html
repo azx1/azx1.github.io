@@ -101,12 +101,32 @@
 <!-- 鼠标悬停动画效果 -->
 <script>
 	$(function(){
+		//标题动画
 		$('#animation-title').mouseover(function(){
-				$(this).addClass("animated swing");
+				$(this).addClass("animated rubberBand");
 		});
-		$('#animation-title').mouseleave(function(){
-					$('#animation-title').removeClass("animated swing")
+		$('#animation-title').bind("webkitAnimationEnd",function(){
+				$(this).removeClass("animated rubberBand");
 		});
-	});
+        //brand动画
+		$('#animation-brand').mouseover(function(){
+				$(this).addClass("{% if site.brand-animation %}{% if site.brand-animation-type %}{{ site.brand-animation-type }} {{ site.brand-animation }}{% else %}animated {{ site.brand-animation }}{% endif %}{% endif  %}");
+		});
+		$('#animation-brand').bind("webkitAnimationEnd",function(){
+				$(this).removeClass("{% if site.brand-animation %}{% if site.brand-animation-type %}{{ site.brand-animation-type }} {{ site.brand-animation }}{% else %}animated {{ site.brand-animation }}{% endif %}{% endif  %}");
+		});
+        $('.next a').mouseover(function(){
+        $(this).addClass("animated rotateIn");
+    });
+    $('.next a').bind("webkitAnimationEnd",function(){
+        $(this).removeClass("animated rotateIn");
+    });
+        $('.previous a').mouseover(function(){
+        $(this).addClass("animated rotateIn");
+    });
+    $('.previous a').bind("webkitAnimationEnd",function(){
+        $(this).removeClass("animated rotateIn");
+    });
+	}); 
 </script>
 

@@ -1,10 +1,7 @@
 ---
 layout: page
-title: "文章"
-icon: "send"
 description: "记录，分享"
 ---
-
 {% for post in paginator.posts %}
 <div class="post-preview">
     <a href="{{ post.url | prepend: site.baseurl }}">

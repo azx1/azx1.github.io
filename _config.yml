@@ -4,15 +4,15 @@ SEOTitle: 博客 | azx1
 header-img: img/home-bg.jpg
 email: 1395086733@qq.com
 description: "一起发现更大的世界 | 分享"
-keyword: "azx1,azx1's blog, azx1的博客"
+keywords: "azx1,azx1's blog, azx1的博客"
 url: "http://azx1.github.io"              # your host, for absolute URL
 baseurl: ""         # for example, '/blog' if your blog hosted on 'host/blog
 
 #brand info
 brand-title: azx1
-brand-icon-type: glyphicon
+#brand-icon-type: glyphicon
 brand-icon: knight
-brand-animation-type: animated
+#brand-animation-type: animated
 brand-animation: swing
 
 
@@ -38,7 +38,7 @@ anchorjs: true                          # if you want to customize anchor. check
 
 # Gems
 # from PR#40, to support local preview for Jekyll 3.0
-gems: [jekyll-paginate]
+plugins: [jekyll-paginate]
 
 
 
@@ -49,16 +49,6 @@ gems: [jekyll-paginate]
 markdown: kramdown
 kramdown:
   input: GFM                            # use Github Flavored Markdown !important
-
-
-
-# Disqus settings
-#disqus_username: _your_disqus_short_name_
-
-# Duoshuo settings
-#duoshuo_username: huxblog
-# Share component is depend on Comment so we can NOT use share only.
-#duoshuo_share: true                     # set to false if you want to use Comment without Sharing
 
 
 
