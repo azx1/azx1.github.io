@@ -116,12 +116,18 @@
 				$(this).removeClass("{% if site.brand-animation %}{% if site.brand-animation-type %}{{ site.brand-animation-type }} {{ site.brand-animation }}{% else %}animated {{ site.brand-animation }}{% endif %}{% endif  %}");
 		});
 		//翻页动画
-        $('.next p').mouseover(function(){
-            $(this).addClass("animated bounceInRight");
+        $('.next a').mouseover(function(){
+            $(this).addClass("animated bounce");
+        });
+        $('.next a').bind("webkitAnimationEnd",function(){
+            $(this).removeClass("animated bounce");
         });
 
-        $('.previous p').mouseover(function(){
-            $(this).addClass("animated bounceInLeft");
+        $('.previous a').mouseover(function(){
+            $(this).addClass("animated bounce");
+        });
+        $('.previous a').bind("webkitAnimationEnd",function(){
+            $(this).removeClass("animated  bounce");
         });
 
 	}); 
