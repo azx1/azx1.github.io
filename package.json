@@ -1,22 +1,31 @@
 {
-    "name": "customize",
-    "title": "azx1 blog",
-    "version": "1.0.0",
-    "homepage": "http://azx1.github.io",
-    "author": "azx1",
-    "devDependencies": {
-        "grunt": "~0.4.5",
-        "grunt-contrib-less": "~0.11.4",
-        "grunt-contrib-watch": "~0.6.1",
-        "grunt-banner": "~0.2.3",
-        "grunt-contrib-uglify": "~0.5.1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/azx1/azx1.github.io"
-    },
-    "scripts": {
-        "preview": "cd _site; python -m SimpleHTTPServer 8020",
-        "watch": "grunt watch & npm run preview & jekyll serve -w;"
-    }
+  "name": "azx1.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "grunt-contrib-clean": "^1.1.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-jshint": "^2.1.0",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^3.0.0",
+    "jshint": "^2.9.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/azx1/azx1.github.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/azx1/azx1.github.io/issues"
+  },
+  "homepage": "https://github.com/azx1/azx1.github.io#readme"
 }

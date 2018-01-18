@@ -1,20 +1,20 @@
 
-<!-- jQuery -->
+<!-- jQuery 
 <script src="{{ "/js/jquery.min.js " | prepend: site.baseurl }}"></script>
 
-<!-- Bootstrap Core JavaScript -->
+ Bootstrap Core JavaScript 
 <script src="{{ "/js/bootstrap.min.js " | prepend: site.baseurl }}"></script>
+-->
+<script src="{{ "/dist/js/all.min.js " | prepend: site.baseurl }}"></script>
 
-<!-- Custom Theme JavaScript 
-<script src="{{ "/js/customize.min.js " | prepend: site.baseurl }}"></script> -->
 
 <!-- async load function -->
 <script>
-    function async(u, c) {
+    function async(c) {
       var d = document, t = 'script',
           o = d.createElement(t),
           s = d.getElementsByTagName(t)[0];
-      o.src = u;
+      //o.src = u; //document.createElement('script').src
       if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
       s.parentNode.insertBefore(o, s);
     }
@@ -43,7 +43,7 @@
 <script>
     // only load tagcloud.js in tag.html
     if($('#tag_cloud').length !== 0){
-        async("/js/jquery.tagcloud.js",function(){
+        async(function(){
             $.fn.tagcloud.defaults = {
                 //size: {start: 1, end: 1, unit: 'em'},
                 color: {start: '#bbbbee', end: '#0085a1'},
@@ -55,7 +55,7 @@
 
 <!--fastClick.js -->
 <script>
-    async("/js/fastclick.js", function(){
+    async(function(){
         var $nav = document.querySelector("nav");
         if($nav) FastClick.attach($nav);
     })
@@ -115,18 +115,112 @@
 		$('#animation-brand').bind("webkitAnimationEnd",function(){
 				$(this).removeClass("{% if site.brand-animation %}{% if site.brand-animation-type %}{{ site.brand-animation-type }} {{ site.brand-animation }}{% else %}animated {{ site.brand-animation }}{% endif %}{% endif  %}");
 		});
-        $('.next a').mouseover(function(){
-        $(this).addClass("animated rotateIn");
-    });
-    $('.next a').bind("webkitAnimationEnd",function(){
-        $(this).removeClass("animated rotateIn");
-    });
-        $('.previous a').mouseover(function(){
-        $(this).addClass("animated rotateIn");
-    });
-    $('.previous a').bind("webkitAnimationEnd",function(){
-        $(this).removeClass("animated rotateIn");
-    });
+		//翻页动画
+        $('.next p').mouseover(function(){
+            $(this).addClass("animated bounceInRight");
+        });
+
+        $('.previous p').mouseover(function(){
+            $(this).addClass("animated bounceInLeft");
+        });
+
 	}); 
 </script>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#customize_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+<!-- resize header to fullscreen keynotes 
+<script>
+    var $header = document.getElementsByTagName("header")[0];
+    function resize(){
+        /*
+         * leave 85px to both
+         * - told/imply users that there has more content below
+         * - let user can scroll in mobile device, seeing the keynote-view is unscrollable
+         */
+        $header.style.height = (window.innerHeight-85) + 'px';
+    }
+    document.addEventListener('DOMContentLoaded', function(){
+        resize();
+    })
+    window.addEventListener('load', function(){
+        resize();
+    })
+    window.addEventListener('resize', function(){
+        resize();
+    })
+    resize();
+</script>
+-->
+
+{% if site.anchorjs %}
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async(function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+{% endif %}
+<!-- Handle Language Change -->
+<script type="text/javascript">
+    var $zh = document.querySelector(".zh");
+    var $en = document.querySelector(".en");
+    function onLanChange(index){
+        if(index == 0){
+            $zh.style.display = "block";
+            $en.style.display = "none";
+        }else{
+            $en.style.display = "block";
+            $zh.style.display = "none";
+        }
+    }
+    onLanChange(0);
+</script>
+
+<script>
+$(function() {
+    $("[data-toggle='tooltip']").tooltip();
+});
+</script>
+
 
