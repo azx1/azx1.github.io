@@ -106,28 +106,36 @@
 				$(this).addClass("animated rubberBand");
 		});
 		$('#animation-title').bind("webkitAnimationEnd",function(){
-				$(this).removeClass("animated rubberBand");
+               
+				   $(this).removeClass("animated rubberBand");
+            
 		});
         //brand动画
 		$('#animation-brand').mouseover(function(){
 				$(this).addClass("{% if site.brand-animation %}{% if site.brand-animation-type %}{{ site.brand-animation-type }} {{ site.brand-animation }}{% else %}animated {{ site.brand-animation }}{% endif %}{% endif  %}");
 		});
 		$('#animation-brand').bind("webkitAnimationEnd",function(){
+              
 				$(this).removeClass("{% if site.brand-animation %}{% if site.brand-animation-type %}{{ site.brand-animation-type }} {{ site.brand-animation }}{% else %}animated {{ site.brand-animation }}{% endif %}{% endif  %}");
+            
 		});
 		//翻页动画
         $('.next a').mouseover(function(){
             $(this).addClass("animated bounce");
         });
         $('.next a').bind("webkitAnimationEnd",function(){
-            $(this).removeClass("animated bounce");
+           
+                $(this).removeClass("animated bounce");
+            
         });
 
         $('.previous a').mouseover(function(){
             $(this).addClass("animated bounce");
         });
         $('.previous a').bind("webkitAnimationEnd",function(){
-            $(this).removeClass("animated  bounce");
+            
+               $(this).removeClass("animated  bounce");
+            
         });
 
 	}); 
@@ -195,17 +203,7 @@
         anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
     })
 </script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
+
 {% endif %}
 <!-- Handle Language Change -->
 <script type="text/javascript">
@@ -227,6 +225,21 @@
 $(function() {
     $("[data-toggle='tooltip']").tooltip();
 });
+</script>
+
+<!-- 回到顶部脚本 -->
+<script>
+    $('#scroll-to-top').bind('click',function(){
+        $(document).scrollTop(0);
+    });
+    $('#scroll-to-top').mouseover(function(){
+            $(this).addClass("animated rotateIn");
+    });
+    $('#scroll-to-top').bind("webkitAnimationEnd",function(){
+           $(this).mouseleave(function() {
+               $(this).removeClass("animated rotateIn");
+           });            
+    });
 </script>
 
 

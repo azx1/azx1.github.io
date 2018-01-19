@@ -7,7 +7,7 @@ var cssmin = require('gulp-minify-css');
 var autoprefixer =  require('gulp-autoprefixer');
 var less = require('gulp-less');
 
-gulp.task('script',function(){
+gulp.task('script-concat',function(){
 	 return gulp.src(['./js/jquery.js','./js/bootstrap.js','./js/anchor.js','./js/jquery.tagcloud.js','./js/fastclick.js'])
 	 .pipe(concat('all.js'))
 	 .pipe(gulp.dest('./dist/js/'))
@@ -16,7 +16,7 @@ gulp.task('script',function(){
 	 .pipe(gulp.dest('./dist/js/'));
 });
 
-gulp.task('css',function(){
+gulp.task('css-concat',function(){
 	return gulp.src(['./css/bootstrap.css','./css/customize.css','./css/font-awesome.css','./css/syntax.css','./css/animate.css'])
 	.pipe(concat('all.css'))
 	.pipe(gulp.dest('./dist/css/'))
