@@ -313,20 +313,20 @@
 		});
 		//翻页动画
         $('.next a').mouseover(function(){
-            $(this).addClass("animated bounce");
+            $(this).addClass("animated pulse");
         });
         $('.next a').bind("webkitAnimationEnd",function(){
            
-                $(this).removeClass("animated bounce");
+                $(this).removeClass("animated pulse");
             
         });
 
         $('.previous a').mouseover(function(){
-            $(this).addClass("animated bounce");
+            $(this).addClass("animated pulse");
         });
         $('.previous a').bind("webkitAnimationEnd",function(){
             
-               $(this).removeClass("animated  bounce");
+               $(this).removeClass("animated  pulse");
             
         });
 
@@ -425,14 +425,15 @@ $(function() {
         $(document).scrollTop(0);
     });
     $('#scroll-to-top').mouseover(function(){
-            $(this).addClass("animated rotateIn");
+            $(this).addClass("animated bounceIn");
     });
     $('#scroll-to-top').bind("webkitAnimationEnd",function(){
            $(this).mouseleave(function() {
-               $(this).removeClass("animated rotateIn");
+               $(this).removeClass("animated bounceIn");
            });            
     });
 </script>
+
 
 
 
