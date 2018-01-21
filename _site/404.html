@@ -32,8 +32,6 @@
 
   <link href="/dist/css/all.min.css" rel="stylesheet" type="text/css">
 
-  <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
-
   <style>
     /* place left on bigger screen */
     @media all and (min-width: 800px) {
@@ -50,7 +48,7 @@
 	#scroll-to-top {
 		position:fixed;
 		opacity:0.8;
-		top:80%;
+		bottom:5%;
 		right:2%;
 		color:white;
 		border-radius:50px !important;
@@ -84,7 +82,7 @@
                     " id="animation-brand">
                     <span class="
                         
-                                glyphicon glyphicon-knight
+                                fa fa-leaf
                         " ></span>&nbsp;azx1
             </a>
         </div>
@@ -99,7 +97,7 @@
             <div class="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                    <li>
-                      <a href="/"><span class="glyphicon glyphicon-send"></span>&nbsp;博客
+                      <a href="/"><span class="fa fa-paper-plane"></span>&nbsp;博客
                       </a>
                    </li>
                    
@@ -111,10 +109,10 @@
                                 
                                     <span class=" 
                                     
-                                        glyphicon glyphicon-paperclip
+                                        fa fa-gamepad
                                     "></span>
                                  
-                                &nbsp;博客信息
+                                &nbsp;关于我
                             </a>
                         </li>
                     
@@ -129,7 +127,7 @@
                                 
                                     <span class=" 
                                     
-                                        glyphicon glyphicon-tags
+                                        fa fa-tags
                                     "></span>
                                  
                                 &nbsp;标签
@@ -168,7 +166,7 @@
 
     
     <!-- 回到顶部按钮 -->
-    <a class="btn btn-warning" id="scroll-to-top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+    <a class="btn btn-info" id="scroll-to-top"><span class="fa fa-arrow-up"></span></a>
 	
     <!-- Footer -->
 <footer>
@@ -229,9 +227,12 @@
 <script src="/js/bootstrap.min.js "></script>
 -->
 <script src="/dist/js/all.min.js "></script>
-<script>
-		//  async load function 
 
+
+
+<script>
+/*
+	// async load function 
     function async(c) {
       var d = document, t = 'script',
           o = d.createElement(t),
@@ -240,6 +241,8 @@
       if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
       s.parentNode.insertBefore(o, s);
     }
+  */
+
 
 /*
      Because of the native support for backtick-style fenced code blocks 
@@ -255,27 +258,35 @@
         async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
             hljs.initHighlightingOnLoad();
         })
-
+   
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
 */
 
 
- // jquery.tagcloud.js
+// jquery.tagcloud.js -->
+
     // only load tagcloud.js in tag.html
+ $(function(){ 
     if($('#tag_cloud').length !== 0){
-        async(function(){
+     
             $.fn.tagcloud.defaults = {
                 //size: {start: 1, end: 1, unit: 'em'},
                 color: {start: '#bbbbee', end: '#0085a1'},
             };
             $('#tag_cloud a').tagcloud();
-        })
+   
     }
+  });
 
-// fastClick.js
- async(function(){
+
+// fastClick.js 
+
+ $(function(){
         var $nav = document.querySelector("nav");
         if($nav) FastClick.attach($nav);
-    })
+ });
+
+
 
 // Google Analytics 
 
@@ -286,12 +297,12 @@
 
 // 鼠标悬停动画效果 
 
-	$(function(){
+$(function(){
 		//标题动画
 		$('#animation-title').mouseover(function(){
 				$(this).addClass("animated rubberBand");
 		});
-		$('#animation-title').bind("webkitAnimationEnd",function(){
+		$('#animation-title').on("webkitAnimationEnd",function(){
                
 				   $(this).removeClass("animated rubberBand");
             
@@ -300,7 +311,7 @@
 		$('#animation-brand').mouseover(function(){
 				$(this).addClass("animated swing");
 		});
-		$('#animation-brand').bind("webkitAnimationEnd",function(){
+		$('#animation-brand').on("webkitAnimationEnd",function(){
               
 				$(this).removeClass("animated swing");
             
@@ -309,7 +320,7 @@
         $('.next a').mouseover(function(){
             $(this).addClass("animated pulse");
         });
-        $('.next a').bind("webkitAnimationEnd",function(){
+        $('.next a').on("webkitAnimationEnd",function(){
            
                 $(this).removeClass("animated pulse");
             
@@ -318,14 +329,16 @@
         $('.previous a').mouseover(function(){
             $(this).addClass("animated pulse");
         });
-        $('.previous a').bind("webkitAnimationEnd",function(){
+        $('.previous a').on("webkitAnimationEnd",function(){
             
                $(this).removeClass("animated  pulse");
             
         });
 
-	}); 
+}); 
 
+// 导航栏切换
+$(function(){
     // Drop Bootstarp low-performance Navbar
     // Use customize navbar with high-quality material design animation
     // in high-perf jank-free CSS3 implementation
@@ -352,16 +365,16 @@
             $navbar.className += " in";
         }
     }
-
+});
 /* resize header to fullscreen keynotes 
-
+<script>
     var $header = document.getElementsByTagName("header")[0];
     function resize(){
-        
-          leave 85px to both
-          - told/imply users that there has more content below
-          - let user can scroll in mobile device, seeing the keynote-view is unscrollable
-         
+         *
+         * leave 85px to both
+         * - told/imply users that there has more content below
+         * - let user can scroll in mobile device, seeing the keynote-view is unscrollable
+         *
         $header.style.height = (window.innerHeight-85) + 'px';
     }
     document.addEventListener('DOMContentLoaded', function(){
@@ -378,38 +391,55 @@
 */
 
 
-// anchor-js, Doc:http://bryanbraun.github.io/anchorjs/
+// anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
 
-    async(function(){
+ $(function(){
         anchors.options = {
           visible: 'hover',
-          placement: 'right',
+          placement: 'left',
         };
         anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
+ });
 
 
 
+// Handle Language Change 
+/*
+    var $zh = document.querySelector(".zh");
+    var $en = document.querySelector(".en");
+    function onLanChange(index){
+        if(index == 0){
+            $zh.style.display = "block";
+            $en.style.display = "none";
+        }else{
+            $en.style.display = "block";
+            $zh.style.display = "none";
+        }
+    }
+    onLanChange(0);
+*/
+
+// tooltip
 $(function() {
     $("[data-toggle='tooltip']").tooltip();
 });
 
 
-// 回到顶部脚本 
+//  回到顶部脚本 
 $(function(){
-    $('#scroll-to-top').bind('click',function(){
+    $('#scroll-to-top').on('click',function(){
         $(document).scrollTop(0);
     });
     $('#scroll-to-top').mouseover(function(){
             $(this).addClass("animated pulse");
     });
-    $('#scroll-to-top').bind("webkitAnimationEnd",function(){     
-               $(this).removeClass("animated pulse");    
+    $('#scroll-to-top').on("webkitAnimationEnd",function(){
+          
+               $(this).removeClass("animated pulse");
+                  
     });
 });
-
 </script>
-
 
 
 

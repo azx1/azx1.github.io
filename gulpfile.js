@@ -36,3 +36,9 @@ gulp.task('less',function(){
     .pipe(gulp.dest('./src/css/min/'))
 
 });
+
+gulp.task('watch',function(){
+	gulp.watch('./src/less/customize.less',['less'])
+	gulp.watch('./src/css/*.css',['css-concat'])
+	gulp.watch('./src/js/*.js',['script-concat'])
+});
