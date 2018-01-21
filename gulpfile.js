@@ -8,7 +8,7 @@ var autoprefixer =  require('gulp-autoprefixer');
 var less = require('gulp-less');
 
 gulp.task('script-concat',function(){
-	 return gulp.src(['./js/jquery.js','./js/bootstrap.js','./js/anchor.js','./js/jquery.tagcloud.js','./js/fastclick.js'])
+	 return gulp.src(['./src/js/{jquery,bootstrap}.js','./src/js/*.js'])
 	 .pipe(concat('all.js'))
 	 .pipe(gulp.dest('./dist/js/'))
 	 .pipe(uglify())
@@ -17,7 +17,7 @@ gulp.task('script-concat',function(){
 });
 
 gulp.task('css-concat',function(){
-	return gulp.src(['./css/bootstrap.css','./css/customize.css','./css/font-awesome.css','./css/syntax.css','./css/animate.css'])
+	return gulp.src(['./src/css/{bootstrap,customize}.css','./src/css/*.css'])
 	.pipe(concat('all.css'))
 	.pipe(gulp.dest('./dist/css/'))
 	.pipe(cssmin())
@@ -27,12 +27,12 @@ gulp.task('css-concat',function(){
 });
 
 gulp.task('less',function(){
-    return  gulp.src('./less/customize.less')
+    return  gulp.src('./src/less/customize.less')
     .pipe(less())
     .pipe(autoprefixer())
-    .pipe(gulp.dest('./css/'))
+    .pipe(gulp.dest('./src/css/'))
     .pipe(cssmin())
     .pipe(rename({suffix:'.min'}))
-    .pipe(gulp.dest('./css/'))
+    .pipe(gulp.dest('./src/css/min/'))
 
 });

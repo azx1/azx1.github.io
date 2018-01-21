@@ -32,6 +32,8 @@
 
   <link href="/dist/css/all.min.css" rel="stylesheet" type="text/css">
 
+  <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
   <style>
     /* place left on bigger screen */
     @media all and (min-width: 800px) {
@@ -227,10 +229,9 @@
 <script src="/js/bootstrap.min.js "></script>
 -->
 <script src="/dist/js/all.min.js "></script>
-
-
-<!-- async load function -->
 <script>
+		//  async load function 
+
     function async(c) {
       var d = document, t = 'script',
           o = d.createElement(t),
@@ -239,9 +240,8 @@
       if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
       s.parentNode.insertBefore(o, s);
     }
-</script>
 
-<!-- 
+/*
      Because of the native support for backtick-style fenced code blocks 
      right within the Markdown is landed in Github Pages, 
      From V1.6, There is no need for Highlight.js, 
@@ -249,19 +249,17 @@
 
      - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
      - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
--->
-<!--
+*/
+/*
     <script>
         async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
             hljs.initHighlightingOnLoad();
         })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
+
+*/
 
 
-<!-- jquery.tagcloud.js -->
-<script>
+ // jquery.tagcloud.js
     // only load tagcloud.js in tag.html
     if($('#tag_cloud').length !== 0){
         async(function(){
@@ -272,26 +270,22 @@
             $('#tag_cloud a').tagcloud();
         })
     }
-</script>
 
-<!--fastClick.js -->
-<script>
-    async(function(){
+// fastClick.js
+ async(function(){
         var $nav = document.querySelector("nav");
         if($nav) FastClick.attach($nav);
     })
-</script>
 
-
-<!-- Google Analytics -->
+// Google Analytics 
 
 
 
-<!-- Baidu Tongji -->
+// Baidu Tongji 
 
 
-<!-- 鼠标悬停动画效果 -->
-<script>
+// 鼠标悬停动画效果 
+
 	$(function(){
 		//标题动画
 		$('#animation-title').mouseover(function(){
@@ -331,8 +325,7 @@
         });
 
 	}); 
-</script>
-<script>
+
     // Drop Bootstarp low-performance Navbar
     // Use customize navbar with high-quality material design animation
     // in high-perf jank-free CSS3 implementation
@@ -359,16 +352,16 @@
             $navbar.className += " in";
         }
     }
-</script>
-<!-- resize header to fullscreen keynotes 
-<script>
+
+/* resize header to fullscreen keynotes 
+
     var $header = document.getElementsByTagName("header")[0];
     function resize(){
-        /*
-         * leave 85px to both
-         * - told/imply users that there has more content below
-         * - let user can scroll in mobile device, seeing the keynote-view is unscrollable
-         */
+        
+          leave 85px to both
+          - told/imply users that there has more content below
+          - let user can scroll in mobile device, seeing the keynote-view is unscrollable
+         
         $header.style.height = (window.innerHeight-85) + 'px';
     }
     document.addEventListener('DOMContentLoaded', function(){
@@ -381,12 +374,12 @@
         resize();
     })
     resize();
-</script>
--->
+
+*/
 
 
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
+// anchor-js, Doc:http://bryanbraun.github.io/anchorjs/
+
     async(function(){
         anchors.options = {
           visible: 'hover',
@@ -394,45 +387,29 @@
         };
         anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
     })
-</script>
 
 
-<!-- Handle Language Change -->
-<script type="text/javascript">
-    var $zh = document.querySelector(".zh");
-    var $en = document.querySelector(".en");
-    function onLanChange(index){
-        if(index == 0){
-            $zh.style.display = "block";
-            $en.style.display = "none";
-        }else{
-            $en.style.display = "block";
-            $zh.style.display = "none";
-        }
-    }
-    onLanChange(0);
-</script>
 
-<script>
 $(function() {
     $("[data-toggle='tooltip']").tooltip();
 });
-</script>
 
-<!-- 回到顶部脚本 -->
-<script>
+
+// 回到顶部脚本 
+$(function(){
     $('#scroll-to-top').bind('click',function(){
         $(document).scrollTop(0);
     });
     $('#scroll-to-top').mouseover(function(){
-            $(this).addClass("animated bounceIn");
+            $(this).addClass("animated pulse");
     });
-    $('#scroll-to-top').bind("webkitAnimationEnd",function(){
-           $(this).mouseleave(function() {
-               $(this).removeClass("animated bounceIn");
-           });            
+    $('#scroll-to-top').bind("webkitAnimationEnd",function(){     
+               $(this).removeClass("animated pulse");    
     });
+});
+
 </script>
+
 
 
 
