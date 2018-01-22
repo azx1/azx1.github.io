@@ -6,6 +6,7 @@ var jshint = require('gulp-jshint');
 var cssmin = require('gulp-minify-css');
 var autoprefixer =  require('gulp-autoprefixer');
 var less = require('gulp-less');
+var replace = require('gulp-replace');
 
 gulp.task('script-concat',function(){
 	 return gulp.src(['./src/js/{jquery,bootstrap}.js','./src/js/*.js'])
@@ -42,3 +43,4 @@ gulp.task('watch',function(){
 	gulp.watch('./src/css/*.css',['css-concat'])
 	gulp.watch('./src/js/*.js',['script-concat'])
 });
+
