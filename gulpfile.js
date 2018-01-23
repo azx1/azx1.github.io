@@ -39,8 +39,8 @@ gulp.task('less',function(){
 });
 
 gulp.task('watch',function(){
-	gulp.watch('./src/less/customize.less',['less'])
-	gulp.watch('./src/css/*.css',['css-concat'])
-	gulp.watch('./src/js/*.js',['script-concat'])
+	gulp.watch('./src/less/customize.less',['less']);
+	gulp.watch('./src/css/*.css',['css-concat']);
+	gulp.watch('./src/js/*.js',['script-concat']);
 });
 

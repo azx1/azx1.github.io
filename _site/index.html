@@ -52,8 +52,8 @@
 		right:2%;
 		color:white;
 		border-radius:50px !important;
-        box-shadow: 1px 1px 10px #aaa;
-
+    box-shadow: 1px 1px 10px #aaa;
+    outline:none;
 	}
 </style>
 
@@ -537,7 +537,7 @@
 
     
     <!-- 回到顶部按钮 -->
-    <a class="btn btn-info" id="scroll-to-top"><span class="fa fa-arrow-up"></span></a>
+    <button class="btn btn-info" id="scroll-to-top"><span class="fa fa-arrow-up"></span></button>
 	
     <!-- Footer -->
 <footer>
@@ -798,7 +798,7 @@ $(function() {
 
 //  回到顶部脚本 
 $(function(){
-    $('#scroll-to-top').on('click',function(){
+    $('#scroll-to-top').click(function(){
         $(document).scrollTop(0);
     });
     $('#scroll-to-top').mouseover(function(){

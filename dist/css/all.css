@@ -6916,6 +6916,7 @@ body {
 }
 .reprint {
   text-align: center;
+  word-wrap: break-word;
   border: 3px solid #111;
   padding: 10px 1px;
   width: 100%;
