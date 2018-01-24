@@ -44,3 +44,8 @@ gulp.task('watch',function(){
 	gulp.watch('./src/js/*.js',['script-concat']);
 });
 
+gulp.task('replace',function(){
+	 return gulp.src('./_posts/*.{md,markdown}')
+	 .pipe(replace(/data-lazy-src(?=.*\.(jpg|jpeg|png))/g,'data-original'))
+	 .pipe(gulp.dest('./_posts/'));
+});
