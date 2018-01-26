@@ -9,7 +9,7 @@ var less = require('gulp-less');
 var replace = require('gulp-replace');
 
 gulp.task('script-concat',function(){
-	 return gulp.src(['./src/js/{jquery,bootstrap}.js','./src/js/*.js'])
+	 return gulp.src(['./src/js/{jquery,bootstrap,jquery.lazyload,jquery.tagcloud,fastclick,anchor,customize}.js','./src/js/*.js'])
 	 .pipe(concat('all.js'))
 	 .pipe(gulp.dest('./dist/js/'))
 	 .pipe(uglify())
@@ -18,7 +18,7 @@ gulp.task('script-concat',function(){
 });
 
 gulp.task('css-concat',function(){
-	return gulp.src(['./src/css/{bootstrap,customize}.css','./src/css/*.css'])
+	return gulp.src(['./src/css/{bootstrap,customize,font-awesome,syntax,animate}.css','./src/css/*.css'])
 	.pipe(concat('all.css'))
 	.pipe(gulp.dest('./dist/css/'))
 	.pipe(cssmin())

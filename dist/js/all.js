@@ -12633,341 +12633,330 @@ if (typeof jQuery === 'undefined') {
 
 }(jQuery);
 
-/* eslint-env amd, node */
+/*
+ * Lazy Load - jQuery plugin for lazy loading images
+ *
+ * Copyright (c) 2007-2013 Mika Tuupola
+ *
+ * Licensed under the MIT license:
+ *   http://www.opensource.org/licenses/mit-license.php
+ *
+ * Project home:
+ *   http://www.appelsiini.net/projects/lazyload
+ *
+ * Version:  1.9.3
+ *
+ */
 
-// https://github.com/umdjs/umd/blob/master/templates/returnExports.js
-(function (root, factory) {
-  'use strict';
+(function($, window, document, undefined) {
+    var $window = $(window);
 
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module.
-    define([], factory);
-  } else if (typeof module === 'object' && module.exports) {
-    // Node. Does not work with strict CommonJS, but
-    // only CommonJS-like environments that support module.exports,
-    // like Node.
-    module.exports = factory();
-  } else {
-    // Browser globals (root is window)
-    root.AnchorJS = factory();
-    root.anchors = new root.AnchorJS();
-  }
-}(this, function () {
-  'use strict';
+    $.fn.lazyload = function(options) {
+        var elements = this;
+        var $container;
+        var settings = {
+            threshold       : 0,
+            failure_limit   : 0,
+            event           : "scroll",
+            effect          : "show",
+            container       : window,
+            data_attribute  : "original",
+            skip_invisible  : true,
+            appear          : null,
+            load            : null,
+            placeholder     : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"
+        };
 
-  function AnchorJS(options) {
-    this.options = options || {};
-    this.elements = [];
+        function update() {
+            var counter = 0;
 
-    /**
-     * Assigns options to the internal options object, and provides defaults.
-     * @param {Object} opts - Options object
-     */
-    function _applyRemainingDefaultOptions(opts) {
-      opts.icon = opts.hasOwnProperty('icon') ? opts.icon : '\ue9cb'; // Accepts characters (and also URLs?), like  '#', '¶', '❡', or '§'.
-      opts.visible = opts.hasOwnProperty('visible') ? opts.visible : 'hover'; // Also accepts 'always' & 'touch'
-      opts.placement = opts.hasOwnProperty('placement') ? opts.placement : 'right'; // Also accepts 'left'
-      opts.ariaLabel = opts.hasOwnProperty('ariaLabel') ? opts.ariaLabel : 'Anchor'; // Accepts any text.
-      opts.class = opts.hasOwnProperty('class') ? opts.class : ''; // Accepts any class name.
-      // Using Math.floor here will ensure the value is Number-cast and an integer.
-      opts.truncate = opts.hasOwnProperty('truncate') ? Math.floor(opts.truncate) : 64; // Accepts any value that can be typecast to a number.
-    }
+            elements.each(function() {
+                var $this = $(this);
+                if (settings.skip_invisible && !$this.is(":visible")) {
+                    return;
+                }
+                if ($.abovethetop(this, settings) ||
+                    $.leftofbegin(this, settings)) {
+                        /* Nothing. */
+                } else if (!$.belowthefold(this, settings) &&
+                    !$.rightoffold(this, settings)) {
+                        $this.trigger("appear");
+                        /* if we found an image we'll load, reset the counter */
+                        counter = 0;
+                } else {
+                    if (++counter > settings.failure_limit) {
+                        return false;
+                    }
+                }
+            });
 
-    _applyRemainingDefaultOptions(this.options);
-
-    /**
-     * Checks to see if this device supports touch. Uses criteria pulled from Modernizr:
-     * https://github.com/Modernizr/Modernizr/blob/da22eb27631fc4957f67607fe6042e85c0a84656/feature-detects/touchevents.js#L40
-     * @return {Boolean} - true if the current device supports touch.
-     */
-    this.isTouchDevice = function() {
-      return !!(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch);
-    };
-
-    /**
-     * Add anchor links to page elements.
-     * @param  {String|Array|Nodelist} selector - A CSS selector for targeting the elements you wish to add anchor links
-     *                                            to. Also accepts an array or nodeList containing the relavant elements.
-     * @return {this}                           - The AnchorJS object
-     */
-    this.add = function(selector) {
-      var elements,
-          elsWithIds,
-          idList,
-          elementID,
-          i,
-          index,
-          count,
-          tidyText,
-          newTidyText,
-          readableID,
-          anchor,
-          visibleOptionToUse,
-          indexesToDrop = [];
-
-      // We reapply options here because somebody may have overwritten the default options object when setting options.
-      // For example, this overwrites all options but visible:
-      //
-      // anchors.options = { visible: 'always'; }
-      _applyRemainingDefaultOptions(this.options);
-
-      visibleOptionToUse = this.options.visible;
-      if (visibleOptionToUse === 'touch') {
-        visibleOptionToUse = this.isTouchDevice() ? 'always' : 'hover';
-      }
-
-      // Provide a sensible default selector, if none is given.
-      if (!selector) {
-        selector = 'h2, h3, h4, h5, h6';
-      }
-
-      elements = _getElements(selector);
-
-      if (elements.length === 0) {
-        return this;
-      }
-
-      _addBaselineStyles();
-
-      // We produce a list of existing IDs so we don't generate a duplicate.
-      elsWithIds = document.querySelectorAll('[id]');
-      idList = [].map.call(elsWithIds, function assign(el) {
-        return el.id;
-      });
-
-      for (i = 0; i < elements.length; i++) {
-        if (this.hasAnchorJSLink(elements[i])) {
-          indexesToDrop.push(i);
-          continue;
         }
 
-        if (elements[i].hasAttribute('id')) {
-          elementID = elements[i].getAttribute('id');
-        } else if (elements[i].hasAttribute('data-anchor-id')) {
-          elementID = elements[i].getAttribute('data-anchor-id');
-        } else {
-          tidyText = this.urlify(elements[i].textContent);
-
-          // Compare our generated ID to existing IDs (and increment it if needed)
-          // before we add it to the page.
-          newTidyText = tidyText;
-          count = 0;
-          do {
-            if (index !== undefined) {
-              newTidyText = tidyText + '-' + count;
+        if(options) {
+            /* Maintain BC for a couple of versions. */
+            if (undefined !== options.failurelimit) {
+                options.failure_limit = options.failurelimit;
+                delete options.failurelimit;
+            }
+            if (undefined !== options.effectspeed) {
+                options.effect_speed = options.effectspeed;
+                delete options.effectspeed;
             }
 
-            index = idList.indexOf(newTidyText);
-            count += 1;
-          } while (index !== -1);
-          index = undefined;
-          idList.push(newTidyText);
-
-          elements[i].setAttribute('id', newTidyText);
-          elementID = newTidyText;
+            $.extend(settings, options);
         }
 
-        readableID = elementID.replace(/-/g, ' ');
+        /* Cache container as jQuery as object. */
+        $container = (settings.container === undefined ||
+                      settings.container === window) ? $window : $(settings.container);
 
-        // The following code builds the following DOM structure in a more effiecient (albeit opaque) way.
-        // '<a class="anchorjs-link ' + this.options.class + '" href="#' + elementID + '" aria-label="Anchor" data-anchorjs-icon="' + this.options.icon + '"></a>';
-        anchor = document.createElement('a');
-        anchor.className = 'anchorjs-link ' + this.options.class;
-        anchor.href = '#' + elementID;
-        anchor.setAttribute('aria-label', this.options.ariaLabel);
-        anchor.setAttribute('data-anchorjs-icon', this.options.icon);
-
-        if (visibleOptionToUse === 'always') {
-          anchor.style.opacity = '1';
+        /* Fire one scroll event per scroll. Not one scroll event per image. */
+        if (0 === settings.event.indexOf("scroll")) {
+            $container.bind(settings.event, function() {
+                return update();
+            });
         }
 
-        if (this.options.icon === '\ue9cb') {
-          anchor.style.font = '1em/1 anchorjs-icons';
+        this.each(function() {
+            var self = this;
+            var $self = $(self);
 
-          // We set lineHeight = 1 here because the `anchorjs-icons` font family could otherwise affect the
-          // height of the heading. This isn't the case for icons with `placement: left`, so we restore
-          // line-height: inherit in that case, ensuring they remain positioned correctly. For more info,
-          // see https://github.com/bryanbraun/anchorjs/issues/39.
-          if (this.options.placement === 'left') {
-            anchor.style.lineHeight = 'inherit';
-          }
+            self.loaded = false;
+
+            /* If no src attribute given use data:uri. */
+            if ($self.attr("src") === undefined || $self.attr("src") === false) {
+                if ($self.is("img")) {
+                    $self.attr("src", settings.placeholder);
+                }
+            }
+
+            /* When appear is triggered load original image. */
+            $self.one("appear", function() {
+                if (!this.loaded) {
+                    if (settings.appear) {
+                        var elements_left = elements.length;
+                        settings.appear.call(self, elements_left, settings);
+                    }
+                    $("<img />")
+                        .bind("load", function() {
+
+                            var original = $self.attr("data-" + settings.data_attribute);
+                            $self.hide();
+                            if ($self.is("img")) {
+                                $self.attr("src", original);
+                            } else {
+                                $self.css("background-image", "url('" + original + "')");
+                            }
+                            $self[settings.effect](settings.effect_speed);
+
+                            self.loaded = true;
+
+                            /* Remove image from array so it is not looped next time. */
+                            var temp = $.grep(elements, function(element) {
+                                return !element.loaded;
+                            });
+                            elements = $(temp);
+
+                            if (settings.load) {
+                                var elements_left = elements.length;
+                                settings.load.call(self, elements_left, settings);
+                            }
+                        })
+                        .attr("src", $self.attr("data-" + settings.data_attribute));
+                }
+            });
+
+            /* When wanted event is triggered load original image */
+            /* by triggering appear.                              */
+            if (0 !== settings.event.indexOf("scroll")) {
+                $self.bind(settings.event, function() {
+                    if (!self.loaded) {
+                        $self.trigger("appear");
+                    }
+                });
+            }
+        });
+
+        /* Check if something appears when window is resized. */
+        $window.bind("resize", function() {
+            update();
+        });
+
+        /* With IOS5 force loading images when navigating with back button. */
+        /* Non optimal workaround. */
+        if ((/(?:iphone|ipod|ipad).*os 5/gi).test(navigator.appVersion)) {
+            $window.bind("pageshow", function(event) {
+                if (event.originalEvent && event.originalEvent.persisted) {
+                    elements.each(function() {
+                        $(this).trigger("appear");
+                    });
+                }
+            });
         }
 
-        if (this.options.placement === 'left') {
-          anchor.style.position = 'absolute';
-          anchor.style.marginLeft = '-1em';
-          anchor.style.paddingRight = '0.5em';
-          elements[i].insertBefore(anchor, elements[i].firstChild);
-        } else { // if the option provided is `right` (or anything else).
-          anchor.style.paddingLeft = '0.375em';
-          elements[i].appendChild(anchor);
+        /* Force initial check if images should appear. */
+        $(document).ready(function() {
+            update();
+        });
+
+        return this;
+    };
+
+    /* Convenience methods in jQuery namespace.           */
+    /* Use as  $.belowthefold(element, {threshold : 100, container : window}) */
+
+    $.belowthefold = function(element, settings) {
+        var fold;
+
+        if (settings.container === undefined || settings.container === window) {
+            fold = (window.innerHeight ? window.innerHeight : $window.height()) + $window.scrollTop();
+        } else {
+            fold = $(settings.container).offset().top + $(settings.container).height();
         }
-      }
 
-      for (i = 0; i < indexesToDrop.length; i++) {
-        elements.splice(indexesToDrop[i] - i, 1);
-      }
-      this.elements = this.elements.concat(elements);
-
-      return this;
+        return fold <= $(element).offset().top - settings.threshold;
     };
 
-    /**
-     * Removes all anchorjs-links from elements targed by the selector.
-     * @param  {String|Array|Nodelist} selector - A CSS selector string targeting elements with anchor links,
-     *                                            OR a nodeList / array containing the DOM elements.
-     * @return {this}                           - The AnchorJS object
-     */
-    this.remove = function(selector) {
-      var index,
-          domAnchor,
-          elements = _getElements(selector);
+    $.rightoffold = function(element, settings) {
+        var fold;
 
-      for (var i = 0; i < elements.length; i++) {
-        domAnchor = elements[i].querySelector('.anchorjs-link');
-        if (domAnchor) {
-          // Drop the element from our main list, if it's in there.
-          index = this.elements.indexOf(elements[i]);
-          if (index !== -1) {
-            this.elements.splice(index, 1);
-          }
-          // Remove the anchor from the DOM.
-          elements[i].removeChild(domAnchor);
+        if (settings.container === undefined || settings.container === window) {
+            fold = $window.width() + $window.scrollLeft();
+        } else {
+            fold = $(settings.container).offset().left + $(settings.container).width();
         }
-      }
-      return this;
+
+        return fold <= $(element).offset().left - settings.threshold;
     };
 
-    /**
-     * Removes all anchorjs links. Mostly used for tests.
-     */
-    this.removeAll = function() {
-      this.remove(this.elements);
+    $.abovethetop = function(element, settings) {
+        var fold;
+
+        if (settings.container === undefined || settings.container === window) {
+            fold = $window.scrollTop();
+        } else {
+            fold = $(settings.container).offset().top;
+        }
+
+        return fold >= $(element).offset().top + settings.threshold  + $(element).height();
     };
 
-    /**
-     * Urlify - Refine text so it makes a good ID.
-     *
-     * To do this, we remove apostrophes, replace nonsafe characters with hyphens,
-     * remove extra hyphens, truncate, trim hyphens, and make lowercase.
-     *
-     * @param  {String} text - Any text. Usually pulled from the webpage element we are linking to.
-     * @return {String}      - hyphen-delimited text for use in IDs and URLs.
-     */
-    this.urlify = function(text) {
-      // Regex for finding the nonsafe URL characters (many need escaping): & +$,:;=?@"#{}|^~[`%!'<>]./()*\
-      var nonsafeChars = /[& +$,:;=?@"#{}|^~[`%!'<>\]\.\/\(\)\*\\]/g,
-          urlText;
+    $.leftofbegin = function(element, settings) {
+        var fold;
 
-      // The reason we include this _applyRemainingDefaultOptions is so urlify can be called independently,
-      // even after setting options. This can be useful for tests or other applications.
-      if (!this.options.truncate) {
-        _applyRemainingDefaultOptions(this.options);
-      }
+        if (settings.container === undefined || settings.container === window) {
+            fold = $window.scrollLeft();
+        } else {
+            fold = $(settings.container).offset().left;
+        }
 
-      // Note: we trim hyphens after truncating because truncating can cause dangling hyphens.
-      // Example string:                      // " ⚡⚡ Don't forget: URL fragments should be i18n-friendly, hyphenated, short, and clean."
-      urlText = text.trim()                   // "⚡⚡ Don't forget: URL fragments should be i18n-friendly, hyphenated, short, and clean."
-        .replace(/\'/gi, '')                  // "⚡⚡ Dont forget: URL fragments should be i18n-friendly, hyphenated, short, and clean."
-        .replace(nonsafeChars, '-')           // "⚡⚡-Dont-forget--URL-fragments-should-be-i18n-friendly--hyphenated--short--and-clean-"
-        .replace(/-{2,}/g, '-')               // "⚡⚡-Dont-forget-URL-fragments-should-be-i18n-friendly-hyphenated-short-and-clean-"
-        .substring(0, this.options.truncate)  // "⚡⚡-Dont-forget-URL-fragments-should-be-i18n-friendly-hyphenated-"
-        .replace(/^-+|-+$/gm, '')             // "⚡⚡-Dont-forget-URL-fragments-should-be-i18n-friendly-hyphenated"
-        .toLowerCase();                       // "⚡⚡-dont-forget-url-fragments-should-be-i18n-friendly-hyphenated"
-
-      return urlText;
+        return fold >= $(element).offset().left + settings.threshold + $(element).width();
     };
 
-    /**
-     * Determines if this element already has an AnchorJS link on it.
-     * Uses this technique: http://stackoverflow.com/a/5898748/1154642
-     * @param    {HTMLElemnt}  el - a DOM node
-     * @return   {Boolean}     true/false
-     */
-    this.hasAnchorJSLink = function(el) {
-      var hasLeftAnchor = el.firstChild && ((' ' + el.firstChild.className + ' ').indexOf(' anchorjs-link ') > -1),
-          hasRightAnchor = el.lastChild && ((' ' + el.lastChild.className + ' ').indexOf(' anchorjs-link ') > -1);
+    $.inviewport = function(element, settings) {
+         return !$.rightoffold(element, settings) && !$.leftofbegin(element, settings) &&
+                !$.belowthefold(element, settings) && !$.abovethetop(element, settings);
+     };
 
-      return hasLeftAnchor || hasRightAnchor || false;
-    };
+    /* Custom selectors for your convenience.   */
+    /* Use as $("img:below-the-fold").something() or */
+    /* $("img").filter(":below-the-fold").something() which is faster */
 
-    /**
-     * Turns a selector, nodeList, or array of elements into an array of elements (so we can use array methods).
-     * It also throws errors on any other inputs. Used to handle inputs to .add and .remove.
-     * @param  {String|Array|Nodelist} input - A CSS selector string targeting elements with anchor links,
-     *                                         OR a nodeList / array containing the DOM elements.
-     * @return {Array} - An array containing the elements we want.
-     */
-    function _getElements(input) {
-      var elements;
-      if (typeof input === 'string' || input instanceof String) {
-        // See https://davidwalsh.name/nodelist-array for the technique transforming nodeList -> Array.
-        elements = [].slice.call(document.querySelectorAll(input));
-      // I checked the 'input instanceof NodeList' test in IE9 and modern browsers and it worked for me.
-      } else if (Array.isArray(input) || input instanceof NodeList) {
-        elements = [].slice.call(input);
-      } else {
-        throw new Error('The selector provided to AnchorJS was invalid.');
-      }
-      return elements;
+    $.extend($.expr[":"], {
+        "below-the-fold" : function(a) { return $.belowthefold(a, {threshold : 0}); },
+        "above-the-top"  : function(a) { return !$.belowthefold(a, {threshold : 0}); },
+        "right-of-screen": function(a) { return $.rightoffold(a, {threshold : 0}); },
+        "left-of-screen" : function(a) { return !$.rightoffold(a, {threshold : 0}); },
+        "in-viewport"    : function(a) { return $.inviewport(a, {threshold : 0}); },
+        /* Maintain BC for couple of versions. */
+        "above-the-fold" : function(a) { return !$.belowthefold(a, {threshold : 0}); },
+        "right-of-fold"  : function(a) { return $.rightoffold(a, {threshold : 0}); },
+        "left-of-fold"   : function(a) { return !$.rightoffold(a, {threshold : 0}); }
+    });
+
+})(jQuery, window, document);
+
+(function($) {
+
+  $.fn.tagcloud = function(options) {
+    var opts = $.extend({}, $.fn.tagcloud.defaults, options);
+    tagWeights = this.map(function(){
+      return $(this).attr("rel");
+    });
+    tagWeights = jQuery.makeArray(tagWeights).sort(compareWeights);
+    lowest = tagWeights[0];
+    highest = tagWeights.pop();
+    range = highest - lowest;
+    if(range === 0) {range = 1;}
+    // Sizes
+    if (opts.size) {
+      fontIncr = (opts.size.end - opts.size.start)/range;
     }
-
-    /**
-     * _addBaselineStyles
-     * Adds baseline styles to the page, used by all AnchorJS links irregardless of configuration.
-     */
-    function _addBaselineStyles() {
-      // We don't want to add global baseline styles if they've been added before.
-      if (document.head.querySelector('style.anchorjs') !== null) {
-        return;
-      }
-
-      var style = document.createElement('style'),
-          linkRule =
-          ' .anchorjs-link {'                       +
-          '   opacity: 0;'                          +
-          '   text-decoration: none;'               +
-          '   -webkit-font-smoothing: antialiased;' +
-          '   -moz-osx-font-smoothing: grayscale;'  +
-          ' }',
-          hoverRule =
-          ' *:hover > .anchorjs-link,'              +
-          ' .anchorjs-link:focus  {'                +
-          '   opacity: 1;'                          +
-          ' }',
-          anchorjsLinkFontFace =
-          ' @font-face {'                           +
-          '   font-family: "anchorjs-icons";'       + // Icon from icomoon; 10px wide & 10px tall; 2 empty below & 4 above
-          '   src: url(data:n/a;base64,AAEAAAALAIAAAwAwT1MvMg8yG2cAAAE4AAAAYGNtYXDp3gC3AAABpAAAAExnYXNwAAAAEAAAA9wAAAAIZ2x5ZlQCcfwAAAH4AAABCGhlYWQHFvHyAAAAvAAAADZoaGVhBnACFwAAAPQAAAAkaG10eASAADEAAAGYAAAADGxvY2EACACEAAAB8AAAAAhtYXhwAAYAVwAAARgAAAAgbmFtZQGOH9cAAAMAAAAAunBvc3QAAwAAAAADvAAAACAAAQAAAAEAAHzE2p9fDzz1AAkEAAAAAADRecUWAAAAANQA6R8AAAAAAoACwAAAAAgAAgAAAAAAAAABAAADwP/AAAACgAAA/9MCrQABAAAAAAAAAAAAAAAAAAAAAwABAAAAAwBVAAIAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAMCQAGQAAUAAAKZAswAAACPApkCzAAAAesAMwEJAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAAAAAAAAQAAg//0DwP/AAEADwABAAAAAAQAAAAAAAAAAAAAAIAAAAAAAAAIAAAACgAAxAAAAAwAAAAMAAAAcAAEAAwAAABwAAwABAAAAHAAEADAAAAAIAAgAAgAAACDpy//9//8AAAAg6cv//f///+EWNwADAAEAAAAAAAAAAAAAAAAACACEAAEAAAAAAAAAAAAAAAAxAAACAAQARAKAAsAAKwBUAAABIiYnJjQ3NzY2MzIWFxYUBwcGIicmNDc3NjQnJiYjIgYHBwYUFxYUBwYGIwciJicmNDc3NjIXFhQHBwYUFxYWMzI2Nzc2NCcmNDc2MhcWFAcHBgYjARQGDAUtLXoWOR8fORYtLTgKGwoKCjgaGg0gEhIgDXoaGgkJBQwHdR85Fi0tOAobCgoKOBoaDSASEiANehoaCQkKGwotLXoWOR8BMwUFLYEuehYXFxYugC44CQkKGwo4GkoaDQ0NDXoaShoKGwoFBe8XFi6ALjgJCQobCjgaShoNDQ0NehpKGgobCgoKLYEuehYXAAAADACWAAEAAAAAAAEACAAAAAEAAAAAAAIAAwAIAAEAAAAAAAMACAAAAAEAAAAAAAQACAAAAAEAAAAAAAUAAQALAAEAAAAAAAYACAAAAAMAAQQJAAEAEAAMAAMAAQQJAAIABgAcAAMAAQQJAAMAEAAMAAMAAQQJAAQAEAAMAAMAAQQJAAUAAgAiAAMAAQQJAAYAEAAMYW5jaG9yanM0MDBAAGEAbgBjAGgAbwByAGoAcwA0ADAAMABAAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAH//wAP) format("truetype");' +
-          ' }',
-          pseudoElContent =
-          ' [data-anchorjs-icon]::after {'          +
-          '   content: attr(data-anchorjs-icon);'   +
-          ' }',
-          firstStyleEl;
-
-      style.className = 'anchorjs';
-      style.appendChild(document.createTextNode('')); // Necessary for Webkit.
-
-      // We place it in the head with the other style tags, if possible, so as to
-      // not look out of place. We insert before the others so these styles can be
-      // overridden if necessary.
-      firstStyleEl = document.head.querySelector('[rel="stylesheet"], style');
-      if (firstStyleEl === undefined) {
-        document.head.appendChild(style);
-      } else {
-        document.head.insertBefore(style, firstStyleEl);
-      }
-
-      style.sheet.insertRule(linkRule, style.sheet.cssRules.length);
-      style.sheet.insertRule(hoverRule, style.sheet.cssRules.length);
-      style.sheet.insertRule(pseudoElContent, style.sheet.cssRules.length);
-      style.sheet.insertRule(anchorjsLinkFontFace, style.sheet.cssRules.length);
+    // Colors
+    if (opts.color) {
+      colorIncr = colorIncrement (opts.color, range);
     }
+    return this.each(function() {
+      weighting = $(this).attr("rel") - lowest;
+      if (opts.size) {
+        $(this).css({"font-size": opts.size.start + (weighting * fontIncr) + opts.size.unit});
+      }
+      if (opts.color) {
+        // change color to background-color
+        $(this).css({"backgroundColor": tagColor(opts.color, colorIncr, weighting)});
+      }
+    });
+  };
+
+  $.fn.tagcloud.defaults = {
+    size: {start: 14, end: 18, unit: "pt"}
+  };
+
+  // Converts hex to an RGB array
+  function toRGB (code) {
+    if (code.length == 4) {
+      code = jQuery.map(/\w+/.exec(code), function(el) {return el + el; }).join("");
+    }
+    hex = /(\w{2})(\w{2})(\w{2})/.exec(code);
+    return [parseInt(hex[1], 16), parseInt(hex[2], 16), parseInt(hex[3], 16)];
   }
 
-  return AnchorJS;
-}));
+  // Converts an RGB array to hex
+  function toHex (ary) {
+    return "#" + jQuery.map(ary, function(i) {
+      hex =  i.toString(16);
+      hex = (hex.length == 1) ? "0" + hex : hex;
+      return hex;
+    }).join("");
+  }
+
+  function colorIncrement (color, range) {
+    return jQuery.map(toRGB(color.end), function(n, i) {
+      return (n - toRGB(color.start)[i])/range;
+    });
+  }
+
+  function tagColor (color, increment, weighting) {
+    rgb = jQuery.map(toRGB(color.start), function(n, i) {
+      ref = Math.round(n + (increment[i] * weighting));
+      if (ref > 255) {
+        ref = 255;
+      } else {
+        if (ref < 0) {
+          ref = 0;
+        }
+      }
+      return ref;
+    });
+    return toHex(rgb);
+  }
+
+  function compareWeights(a, b)
+  {
+    return a - b;
+  }
+
+})(jQuery);
 
 ;(function () {
 	'use strict';
@@ -13811,327 +13800,541 @@ if (typeof jQuery === 'undefined') {
 	}
 }());
 
-/*
- * Lazy Load - jQuery plugin for lazy loading images
- *
- * Copyright (c) 2007-2013 Mika Tuupola
- *
- * Licensed under the MIT license:
- *   http://www.opensource.org/licenses/mit-license.php
- *
- * Project home:
- *   http://www.appelsiini.net/projects/lazyload
- *
- * Version:  1.9.3
- *
- */
+/* eslint-env amd, node */
 
-(function($, window, document, undefined) {
-    var $window = $(window);
+// https://github.com/umdjs/umd/blob/master/templates/returnExports.js
+(function (root, factory) {
+  'use strict';
 
-    $.fn.lazyload = function(options) {
-        var elements = this;
-        var $container;
-        var settings = {
-            threshold       : 0,
-            failure_limit   : 0,
-            event           : "scroll",
-            effect          : "show",
-            container       : window,
-            data_attribute  : "original",
-            skip_invisible  : true,
-            appear          : null,
-            load            : null,
-            placeholder     : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"
-        };
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define([], factory);
+  } else if (typeof module === 'object' && module.exports) {
+    // Node. Does not work with strict CommonJS, but
+    // only CommonJS-like environments that support module.exports,
+    // like Node.
+    module.exports = factory();
+  } else {
+    // Browser globals (root is window)
+    root.AnchorJS = factory();
+    root.anchors = new root.AnchorJS();
+  }
+}(this, function () {
+  'use strict';
 
-        function update() {
-            var counter = 0;
+  function AnchorJS(options) {
+    this.options = options || {};
+    this.elements = [];
 
-            elements.each(function() {
-                var $this = $(this);
-                if (settings.skip_invisible && !$this.is(":visible")) {
-                    return;
-                }
-                if ($.abovethetop(this, settings) ||
-                    $.leftofbegin(this, settings)) {
-                        /* Nothing. */
-                } else if (!$.belowthefold(this, settings) &&
-                    !$.rightoffold(this, settings)) {
-                        $this.trigger("appear");
-                        /* if we found an image we'll load, reset the counter */
-                        counter = 0;
-                } else {
-                    if (++counter > settings.failure_limit) {
-                        return false;
-                    }
-                }
-            });
+    /**
+     * Assigns options to the internal options object, and provides defaults.
+     * @param {Object} opts - Options object
+     */
+    function _applyRemainingDefaultOptions(opts) {
+      opts.icon = opts.hasOwnProperty('icon') ? opts.icon : '\ue9cb'; // Accepts characters (and also URLs?), like  '#', '¶', '❡', or '§'.
+      opts.visible = opts.hasOwnProperty('visible') ? opts.visible : 'hover'; // Also accepts 'always' & 'touch'
+      opts.placement = opts.hasOwnProperty('placement') ? opts.placement : 'right'; // Also accepts 'left'
+      opts.ariaLabel = opts.hasOwnProperty('ariaLabel') ? opts.ariaLabel : 'Anchor'; // Accepts any text.
+      opts.class = opts.hasOwnProperty('class') ? opts.class : ''; // Accepts any class name.
+      // Using Math.floor here will ensure the value is Number-cast and an integer.
+      opts.truncate = opts.hasOwnProperty('truncate') ? Math.floor(opts.truncate) : 64; // Accepts any value that can be typecast to a number.
+    }
 
-        }
+    _applyRemainingDefaultOptions(this.options);
 
-        if(options) {
-            /* Maintain BC for a couple of versions. */
-            if (undefined !== options.failurelimit) {
-                options.failure_limit = options.failurelimit;
-                delete options.failurelimit;
-            }
-            if (undefined !== options.effectspeed) {
-                options.effect_speed = options.effectspeed;
-                delete options.effectspeed;
-            }
+    /**
+     * Checks to see if this device supports touch. Uses criteria pulled from Modernizr:
+     * https://github.com/Modernizr/Modernizr/blob/da22eb27631fc4957f67607fe6042e85c0a84656/feature-detects/touchevents.js#L40
+     * @return {Boolean} - true if the current device supports touch.
+     */
+    this.isTouchDevice = function() {
+      return !!(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch);
+    };
 
-            $.extend(settings, options);
-        }
+    /**
+     * Add anchor links to page elements.
+     * @param  {String|Array|Nodelist} selector - A CSS selector for targeting the elements you wish to add anchor links
+     *                                            to. Also accepts an array or nodeList containing the relavant elements.
+     * @return {this}                           - The AnchorJS object
+     */
+    this.add = function(selector) {
+      var elements,
+          elsWithIds,
+          idList,
+          elementID,
+          i,
+          index,
+          count,
+          tidyText,
+          newTidyText,
+          readableID,
+          anchor,
+          visibleOptionToUse,
+          indexesToDrop = [];
 
-        /* Cache container as jQuery as object. */
-        $container = (settings.container === undefined ||
-                      settings.container === window) ? $window : $(settings.container);
+      // We reapply options here because somebody may have overwritten the default options object when setting options.
+      // For example, this overwrites all options but visible:
+      //
+      // anchors.options = { visible: 'always'; }
+      _applyRemainingDefaultOptions(this.options);
 
-        /* Fire one scroll event per scroll. Not one scroll event per image. */
-        if (0 === settings.event.indexOf("scroll")) {
-            $container.bind(settings.event, function() {
-                return update();
-            });
-        }
+      visibleOptionToUse = this.options.visible;
+      if (visibleOptionToUse === 'touch') {
+        visibleOptionToUse = this.isTouchDevice() ? 'always' : 'hover';
+      }
 
-        this.each(function() {
-            var self = this;
-            var $self = $(self);
+      // Provide a sensible default selector, if none is given.
+      if (!selector) {
+        selector = 'h2, h3, h4, h5, h6';
+      }
 
-            self.loaded = false;
+      elements = _getElements(selector);
 
-            /* If no src attribute given use data:uri. */
-            if ($self.attr("src") === undefined || $self.attr("src") === false) {
-                if ($self.is("img")) {
-                    $self.attr("src", settings.placeholder);
-                }
-            }
-
-            /* When appear is triggered load original image. */
-            $self.one("appear", function() {
-                if (!this.loaded) {
-                    if (settings.appear) {
-                        var elements_left = elements.length;
-                        settings.appear.call(self, elements_left, settings);
-                    }
-                    $("<img />")
-                        .bind("load", function() {
-
-                            var original = $self.attr("data-" + settings.data_attribute);
-                            $self.hide();
-                            if ($self.is("img")) {
-                                $self.attr("src", original);
-                            } else {
-                                $self.css("background-image", "url('" + original + "')");
-                            }
-                            $self[settings.effect](settings.effect_speed);
-
-                            self.loaded = true;
-
-                            /* Remove image from array so it is not looped next time. */
-                            var temp = $.grep(elements, function(element) {
-                                return !element.loaded;
-                            });
-                            elements = $(temp);
-
-                            if (settings.load) {
-                                var elements_left = elements.length;
-                                settings.load.call(self, elements_left, settings);
-                            }
-                        })
-                        .attr("src", $self.attr("data-" + settings.data_attribute));
-                }
-            });
-
-            /* When wanted event is triggered load original image */
-            /* by triggering appear.                              */
-            if (0 !== settings.event.indexOf("scroll")) {
-                $self.bind(settings.event, function() {
-                    if (!self.loaded) {
-                        $self.trigger("appear");
-                    }
-                });
-            }
-        });
-
-        /* Check if something appears when window is resized. */
-        $window.bind("resize", function() {
-            update();
-        });
-
-        /* With IOS5 force loading images when navigating with back button. */
-        /* Non optimal workaround. */
-        if ((/(?:iphone|ipod|ipad).*os 5/gi).test(navigator.appVersion)) {
-            $window.bind("pageshow", function(event) {
-                if (event.originalEvent && event.originalEvent.persisted) {
-                    elements.each(function() {
-                        $(this).trigger("appear");
-                    });
-                }
-            });
-        }
-
-        /* Force initial check if images should appear. */
-        $(document).ready(function() {
-            update();
-        });
-
+      if (elements.length === 0) {
         return this;
-    };
-
-    /* Convenience methods in jQuery namespace.           */
-    /* Use as  $.belowthefold(element, {threshold : 100, container : window}) */
-
-    $.belowthefold = function(element, settings) {
-        var fold;
-
-        if (settings.container === undefined || settings.container === window) {
-            fold = (window.innerHeight ? window.innerHeight : $window.height()) + $window.scrollTop();
-        } else {
-            fold = $(settings.container).offset().top + $(settings.container).height();
-        }
-
-        return fold <= $(element).offset().top - settings.threshold;
-    };
-
-    $.rightoffold = function(element, settings) {
-        var fold;
-
-        if (settings.container === undefined || settings.container === window) {
-            fold = $window.width() + $window.scrollLeft();
-        } else {
-            fold = $(settings.container).offset().left + $(settings.container).width();
-        }
-
-        return fold <= $(element).offset().left - settings.threshold;
-    };
-
-    $.abovethetop = function(element, settings) {
-        var fold;
-
-        if (settings.container === undefined || settings.container === window) {
-            fold = $window.scrollTop();
-        } else {
-            fold = $(settings.container).offset().top;
-        }
-
-        return fold >= $(element).offset().top + settings.threshold  + $(element).height();
-    };
-
-    $.leftofbegin = function(element, settings) {
-        var fold;
-
-        if (settings.container === undefined || settings.container === window) {
-            fold = $window.scrollLeft();
-        } else {
-            fold = $(settings.container).offset().left;
-        }
-
-        return fold >= $(element).offset().left + settings.threshold + $(element).width();
-    };
-
-    $.inviewport = function(element, settings) {
-         return !$.rightoffold(element, settings) && !$.leftofbegin(element, settings) &&
-                !$.belowthefold(element, settings) && !$.abovethetop(element, settings);
-     };
-
-    /* Custom selectors for your convenience.   */
-    /* Use as $("img:below-the-fold").something() or */
-    /* $("img").filter(":below-the-fold").something() which is faster */
-
-    $.extend($.expr[":"], {
-        "below-the-fold" : function(a) { return $.belowthefold(a, {threshold : 0}); },
-        "above-the-top"  : function(a) { return !$.belowthefold(a, {threshold : 0}); },
-        "right-of-screen": function(a) { return $.rightoffold(a, {threshold : 0}); },
-        "left-of-screen" : function(a) { return !$.rightoffold(a, {threshold : 0}); },
-        "in-viewport"    : function(a) { return $.inviewport(a, {threshold : 0}); },
-        /* Maintain BC for couple of versions. */
-        "above-the-fold" : function(a) { return !$.belowthefold(a, {threshold : 0}); },
-        "right-of-fold"  : function(a) { return $.rightoffold(a, {threshold : 0}); },
-        "left-of-fold"   : function(a) { return !$.rightoffold(a, {threshold : 0}); }
-    });
-
-})(jQuery, window, document);
-
-(function($) {
-
-  $.fn.tagcloud = function(options) {
-    var opts = $.extend({}, $.fn.tagcloud.defaults, options);
-    tagWeights = this.map(function(){
-      return $(this).attr("rel");
-    });
-    tagWeights = jQuery.makeArray(tagWeights).sort(compareWeights);
-    lowest = tagWeights[0];
-    highest = tagWeights.pop();
-    range = highest - lowest;
-    if(range === 0) {range = 1;}
-    // Sizes
-    if (opts.size) {
-      fontIncr = (opts.size.end - opts.size.start)/range;
-    }
-    // Colors
-    if (opts.color) {
-      colorIncr = colorIncrement (opts.color, range);
-    }
-    return this.each(function() {
-      weighting = $(this).attr("rel") - lowest;
-      if (opts.size) {
-        $(this).css({"font-size": opts.size.start + (weighting * fontIncr) + opts.size.unit});
       }
-      if (opts.color) {
-        // change color to background-color
-        $(this).css({"backgroundColor": tagColor(opts.color, colorIncr, weighting)});
+
+      _addBaselineStyles();
+
+      // We produce a list of existing IDs so we don't generate a duplicate.
+      elsWithIds = document.querySelectorAll('[id]');
+      idList = [].map.call(elsWithIds, function assign(el) {
+        return el.id;
+      });
+
+      for (i = 0; i < elements.length; i++) {
+        if (this.hasAnchorJSLink(elements[i])) {
+          indexesToDrop.push(i);
+          continue;
+        }
+
+        if (elements[i].hasAttribute('id')) {
+          elementID = elements[i].getAttribute('id');
+        } else if (elements[i].hasAttribute('data-anchor-id')) {
+          elementID = elements[i].getAttribute('data-anchor-id');
+        } else {
+          tidyText = this.urlify(elements[i].textContent);
+
+          // Compare our generated ID to existing IDs (and increment it if needed)
+          // before we add it to the page.
+          newTidyText = tidyText;
+          count = 0;
+          do {
+            if (index !== undefined) {
+              newTidyText = tidyText + '-' + count;
+            }
+
+            index = idList.indexOf(newTidyText);
+            count += 1;
+          } while (index !== -1);
+          index = undefined;
+          idList.push(newTidyText);
+
+          elements[i].setAttribute('id', newTidyText);
+          elementID = newTidyText;
+        }
+
+        readableID = elementID.replace(/-/g, ' ');
+
+        // The following code builds the following DOM structure in a more effiecient (albeit opaque) way.
+        // '<a class="anchorjs-link ' + this.options.class + '" href="#' + elementID + '" aria-label="Anchor" data-anchorjs-icon="' + this.options.icon + '"></a>';
+        anchor = document.createElement('a');
+        anchor.className = 'anchorjs-link ' + this.options.class;
+        anchor.href = '#' + elementID;
+        anchor.setAttribute('aria-label', this.options.ariaLabel);
+        anchor.setAttribute('data-anchorjs-icon', this.options.icon);
+
+        if (visibleOptionToUse === 'always') {
+          anchor.style.opacity = '1';
+        }
+
+        if (this.options.icon === '\ue9cb') {
+          anchor.style.font = '1em/1 anchorjs-icons';
+
+          // We set lineHeight = 1 here because the `anchorjs-icons` font family could otherwise affect the
+          // height of the heading. This isn't the case for icons with `placement: left`, so we restore
+          // line-height: inherit in that case, ensuring they remain positioned correctly. For more info,
+          // see https://github.com/bryanbraun/anchorjs/issues/39.
+          if (this.options.placement === 'left') {
+            anchor.style.lineHeight = 'inherit';
+          }
+        }
+
+        if (this.options.placement === 'left') {
+          anchor.style.position = 'absolute';
+          anchor.style.marginLeft = '-1em';
+          anchor.style.paddingRight = '0.5em';
+          elements[i].insertBefore(anchor, elements[i].firstChild);
+        } else { // if the option provided is `right` (or anything else).
+          anchor.style.paddingLeft = '0.375em';
+          elements[i].appendChild(anchor);
+        }
       }
-    });
-  };
 
-  $.fn.tagcloud.defaults = {
-    size: {start: 14, end: 18, unit: "pt"}
-  };
+      for (i = 0; i < indexesToDrop.length; i++) {
+        elements.splice(indexesToDrop[i] - i, 1);
+      }
+      this.elements = this.elements.concat(elements);
 
-  // Converts hex to an RGB array
-  function toRGB (code) {
-    if (code.length == 4) {
-      code = jQuery.map(/\w+/.exec(code), function(el) {return el + el; }).join("");
-    }
-    hex = /(\w{2})(\w{2})(\w{2})/.exec(code);
-    return [parseInt(hex[1], 16), parseInt(hex[2], 16), parseInt(hex[3], 16)];
-  }
+      return this;
+    };
 
-  // Converts an RGB array to hex
-  function toHex (ary) {
-    return "#" + jQuery.map(ary, function(i) {
-      hex =  i.toString(16);
-      hex = (hex.length == 1) ? "0" + hex : hex;
-      return hex;
-    }).join("");
-  }
+    /**
+     * Removes all anchorjs-links from elements targed by the selector.
+     * @param  {String|Array|Nodelist} selector - A CSS selector string targeting elements with anchor links,
+     *                                            OR a nodeList / array containing the DOM elements.
+     * @return {this}                           - The AnchorJS object
+     */
+    this.remove = function(selector) {
+      var index,
+          domAnchor,
+          elements = _getElements(selector);
 
-  function colorIncrement (color, range) {
-    return jQuery.map(toRGB(color.end), function(n, i) {
-      return (n - toRGB(color.start)[i])/range;
-    });
-  }
+      for (var i = 0; i < elements.length; i++) {
+        domAnchor = elements[i].querySelector('.anchorjs-link');
+        if (domAnchor) {
+          // Drop the element from our main list, if it's in there.
+          index = this.elements.indexOf(elements[i]);
+          if (index !== -1) {
+            this.elements.splice(index, 1);
+          }
+          // Remove the anchor from the DOM.
+          elements[i].removeChild(domAnchor);
+        }
+      }
+      return this;
+    };
 
-  function tagColor (color, increment, weighting) {
-    rgb = jQuery.map(toRGB(color.start), function(n, i) {
-      ref = Math.round(n + (increment[i] * weighting));
-      if (ref > 255) {
-        ref = 255;
+    /**
+     * Removes all anchorjs links. Mostly used for tests.
+     */
+    this.removeAll = function() {
+      this.remove(this.elements);
+    };
+
+    /**
+     * Urlify - Refine text so it makes a good ID.
+     *
+     * To do this, we remove apostrophes, replace nonsafe characters with hyphens,
+     * remove extra hyphens, truncate, trim hyphens, and make lowercase.
+     *
+     * @param  {String} text - Any text. Usually pulled from the webpage element we are linking to.
+     * @return {String}      - hyphen-delimited text for use in IDs and URLs.
+     */
+    this.urlify = function(text) {
+      // Regex for finding the nonsafe URL characters (many need escaping): & +$,:;=?@"#{}|^~[`%!'<>]./()*\
+      var nonsafeChars = /[& +$,:;=?@"#{}|^~[`%!'<>\]\.\/\(\)\*\\]/g,
+          urlText;
+
+      // The reason we include this _applyRemainingDefaultOptions is so urlify can be called independently,
+      // even after setting options. This can be useful for tests or other applications.
+      if (!this.options.truncate) {
+        _applyRemainingDefaultOptions(this.options);
+      }
+
+      // Note: we trim hyphens after truncating because truncating can cause dangling hyphens.
+      // Example string:                      // " ⚡⚡ Don't forget: URL fragments should be i18n-friendly, hyphenated, short, and clean."
+      urlText = text.trim()                   // "⚡⚡ Don't forget: URL fragments should be i18n-friendly, hyphenated, short, and clean."
+        .replace(/\'/gi, '')                  // "⚡⚡ Dont forget: URL fragments should be i18n-friendly, hyphenated, short, and clean."
+        .replace(nonsafeChars, '-')           // "⚡⚡-Dont-forget--URL-fragments-should-be-i18n-friendly--hyphenated--short--and-clean-"
+        .replace(/-{2,}/g, '-')               // "⚡⚡-Dont-forget-URL-fragments-should-be-i18n-friendly-hyphenated-short-and-clean-"
+        .substring(0, this.options.truncate)  // "⚡⚡-Dont-forget-URL-fragments-should-be-i18n-friendly-hyphenated-"
+        .replace(/^-+|-+$/gm, '')             // "⚡⚡-Dont-forget-URL-fragments-should-be-i18n-friendly-hyphenated"
+        .toLowerCase();                       // "⚡⚡-dont-forget-url-fragments-should-be-i18n-friendly-hyphenated"
+
+      return urlText;
+    };
+
+    /**
+     * Determines if this element already has an AnchorJS link on it.
+     * Uses this technique: http://stackoverflow.com/a/5898748/1154642
+     * @param    {HTMLElemnt}  el - a DOM node
+     * @return   {Boolean}     true/false
+     */
+    this.hasAnchorJSLink = function(el) {
+      var hasLeftAnchor = el.firstChild && ((' ' + el.firstChild.className + ' ').indexOf(' anchorjs-link ') > -1),
+          hasRightAnchor = el.lastChild && ((' ' + el.lastChild.className + ' ').indexOf(' anchorjs-link ') > -1);
+
+      return hasLeftAnchor || hasRightAnchor || false;
+    };
+
+    /**
+     * Turns a selector, nodeList, or array of elements into an array of elements (so we can use array methods).
+     * It also throws errors on any other inputs. Used to handle inputs to .add and .remove.
+     * @param  {String|Array|Nodelist} input - A CSS selector string targeting elements with anchor links,
+     *                                         OR a nodeList / array containing the DOM elements.
+     * @return {Array} - An array containing the elements we want.
+     */
+    function _getElements(input) {
+      var elements;
+      if (typeof input === 'string' || input instanceof String) {
+        // See https://davidwalsh.name/nodelist-array for the technique transforming nodeList -> Array.
+        elements = [].slice.call(document.querySelectorAll(input));
+      // I checked the 'input instanceof NodeList' test in IE9 and modern browsers and it worked for me.
+      } else if (Array.isArray(input) || input instanceof NodeList) {
+        elements = [].slice.call(input);
       } else {
-        if (ref < 0) {
-          ref = 0;
-        }
+        throw new Error('The selector provided to AnchorJS was invalid.');
       }
-      return ref;
+      return elements;
+    }
+
+    /**
+     * _addBaselineStyles
+     * Adds baseline styles to the page, used by all AnchorJS links irregardless of configuration.
+     */
+    function _addBaselineStyles() {
+      // We don't want to add global baseline styles if they've been added before.
+      if (document.head.querySelector('style.anchorjs') !== null) {
+        return;
+      }
+
+      var style = document.createElement('style'),
+          linkRule =
+          ' .anchorjs-link {'                       +
+          '   opacity: 0;'                          +
+          '   text-decoration: none;'               +
+          '   -webkit-font-smoothing: antialiased;' +
+          '   -moz-osx-font-smoothing: grayscale;'  +
+          ' }',
+          hoverRule =
+          ' *:hover > .anchorjs-link,'              +
+          ' .anchorjs-link:focus  {'                +
+          '   opacity: 1;'                          +
+          ' }',
+          anchorjsLinkFontFace =
+          ' @font-face {'                           +
+          '   font-family: "anchorjs-icons";'       + // Icon from icomoon; 10px wide & 10px tall; 2 empty below & 4 above
+          '   src: url(data:n/a;base64,AAEAAAALAIAAAwAwT1MvMg8yG2cAAAE4AAAAYGNtYXDp3gC3AAABpAAAAExnYXNwAAAAEAAAA9wAAAAIZ2x5ZlQCcfwAAAH4AAABCGhlYWQHFvHyAAAAvAAAADZoaGVhBnACFwAAAPQAAAAkaG10eASAADEAAAGYAAAADGxvY2EACACEAAAB8AAAAAhtYXhwAAYAVwAAARgAAAAgbmFtZQGOH9cAAAMAAAAAunBvc3QAAwAAAAADvAAAACAAAQAAAAEAAHzE2p9fDzz1AAkEAAAAAADRecUWAAAAANQA6R8AAAAAAoACwAAAAAgAAgAAAAAAAAABAAADwP/AAAACgAAA/9MCrQABAAAAAAAAAAAAAAAAAAAAAwABAAAAAwBVAAIAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAMCQAGQAAUAAAKZAswAAACPApkCzAAAAesAMwEJAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAAAAAAAAQAAg//0DwP/AAEADwABAAAAAAQAAAAAAAAAAAAAAIAAAAAAAAAIAAAACgAAxAAAAAwAAAAMAAAAcAAEAAwAAABwAAwABAAAAHAAEADAAAAAIAAgAAgAAACDpy//9//8AAAAg6cv//f///+EWNwADAAEAAAAAAAAAAAAAAAAACACEAAEAAAAAAAAAAAAAAAAxAAACAAQARAKAAsAAKwBUAAABIiYnJjQ3NzY2MzIWFxYUBwcGIicmNDc3NjQnJiYjIgYHBwYUFxYUBwYGIwciJicmNDc3NjIXFhQHBwYUFxYWMzI2Nzc2NCcmNDc2MhcWFAcHBgYjARQGDAUtLXoWOR8fORYtLTgKGwoKCjgaGg0gEhIgDXoaGgkJBQwHdR85Fi0tOAobCgoKOBoaDSASEiANehoaCQkKGwotLXoWOR8BMwUFLYEuehYXFxYugC44CQkKGwo4GkoaDQ0NDXoaShoKGwoFBe8XFi6ALjgJCQobCjgaShoNDQ0NehpKGgobCgoKLYEuehYXAAAADACWAAEAAAAAAAEACAAAAAEAAAAAAAIAAwAIAAEAAAAAAAMACAAAAAEAAAAAAAQACAAAAAEAAAAAAAUAAQALAAEAAAAAAAYACAAAAAMAAQQJAAEAEAAMAAMAAQQJAAIABgAcAAMAAQQJAAMAEAAMAAMAAQQJAAQAEAAMAAMAAQQJAAUAAgAiAAMAAQQJAAYAEAAMYW5jaG9yanM0MDBAAGEAbgBjAGgAbwByAGoAcwA0ADAAMABAAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAH//wAP) format("truetype");' +
+          ' }',
+          pseudoElContent =
+          ' [data-anchorjs-icon]::after {'          +
+          '   content: attr(data-anchorjs-icon);'   +
+          ' }',
+          firstStyleEl;
+
+      style.className = 'anchorjs';
+      style.appendChild(document.createTextNode('')); // Necessary for Webkit.
+
+      // We place it in the head with the other style tags, if possible, so as to
+      // not look out of place. We insert before the others so these styles can be
+      // overridden if necessary.
+      firstStyleEl = document.head.querySelector('[rel="stylesheet"], style');
+      if (firstStyleEl === undefined) {
+        document.head.appendChild(style);
+      } else {
+        document.head.insertBefore(style, firstStyleEl);
+      }
+
+      style.sheet.insertRule(linkRule, style.sheet.cssRules.length);
+      style.sheet.insertRule(hoverRule, style.sheet.cssRules.length);
+      style.sheet.insertRule(pseudoElContent, style.sheet.cssRules.length);
+      style.sheet.insertRule(anchorjsLinkFontFace, style.sheet.cssRules.length);
+    }
+  }
+
+  return AnchorJS;
+}));
+
+/*
+	// async load function 
+    function async(c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      //o.src = u; //document.createElement('script').src
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+  */
+
+
+/*
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+*/
+/*
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+   
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+*/
+
+
+// jquery.tagcloud.js -->
+
+    // only load tagcloud.js in tag.html
+ $(function(){ 
+    if($('#tag_cloud').length !== 0){
+     
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+   
+    }
+  });
+
+
+// fastClick.js 
+
+ $(function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+ });
+
+
+// 鼠标悬停动画效果 
+
+$(function(){
+		//标题动画
+		$('#animation-title').mouseover(function(){
+				$(this).addClass("animated rubberBand");
+		});
+		$('#animation-title').on("webkitAnimationEnd",function(){
+               
+				   $(this).removeClass("animated rubberBand");
+            
+		});
+        //brand动画
+		$('#animation-brand').mouseover(function(){
+				$(this).addClass("{% if site.brand-animation %}{% if site.brand-animation-type %}{{ site.brand-animation-type }} {{ site.brand-animation }}{% else %}animated {{ site.brand-animation }}{% endif %}{% endif  %}");
+		});
+		$('#animation-brand').on("webkitAnimationEnd",function(){
+              
+				$(this).removeClass("{% if site.brand-animation %}{% if site.brand-animation-type %}{{ site.brand-animation-type }} {{ site.brand-animation }}{% else %}animated {{ site.brand-animation }}{% endif %}{% endif  %}");
+            
+		});
+		//翻页动画
+        $('.next a').mouseover(function(){
+            $(this).addClass("animated pulse");
+        });
+        $('.next a').on("webkitAnimationEnd",function(){
+           
+                $(this).removeClass("animated pulse");
+            
+        });
+
+        $('.previous a').mouseover(function(){
+            $(this).addClass("animated pulse");
+        });
+        $('.previous a').on("webkitAnimationEnd",function(){
+            
+               $(this).removeClass("animated  pulse");
+            
+        });
+
+}); 
+
+// 导航栏切换
+$(function(){
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#customize_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+});
+/* resize header to fullscreen keynotes 
+<script>
+    var $header = document.getElementsByTagName("header")[0];
+    function resize(){
+         *
+         * leave 85px to both
+         * - told/imply users that there has more content below
+         * - let user can scroll in mobile device, seeing the keynote-view is unscrollable
+         *
+        $header.style.height = (window.innerHeight-85) + 'px';
+    }
+    document.addEventListener('DOMContentLoaded', function(){
+        resize();
+    })
+    window.addEventListener('load', function(){
+        resize();
+    })
+    window.addEventListener('resize', function(){
+        resize();
+    })
+    resize();
+
+*/
+
+ $(function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+ });
+
+
+
+// Handle Language Change 
+/*
+    var $zh = document.querySelector(".zh");
+    var $en = document.querySelector(".en");
+    function onLanChange(index){
+        if(index == 0){
+            $zh.style.display = "block";
+            $en.style.display = "none";
+        }else{
+            $en.style.display = "block";
+            $zh.style.display = "none";
+        }
+    }
+    onLanChange(0);
+*/
+
+// tooltip
+$(function() {
+    $("[data-toggle='tooltip']").tooltip();
+});
+
+
+//  回到顶部脚本 
+$(function(){
+    $('#scroll-to-top').click(function(){
+        $(document).scrollTop(0);
     });
-    return toHex(rgb);
-  }
+    $('#scroll-to-top').mouseover(function(){
+            $(this).addClass("animated pulse");
+    });
+    $('#scroll-to-top').on("webkitAnimationEnd",function(){
+          
+               $(this).removeClass("animated pulse");
+                  
+    });
+});
 
-  function compareWeights(a, b)
-  {
-    return a - b;
-  }
-
-})(jQuery);
+//启动图片懒加载
+$(function(){
+   $("img").lazyload({effect: "show",threshold: 300});
+});

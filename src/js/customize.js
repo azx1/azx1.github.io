@@ -1,15 +1,3 @@
-
-<!-- jQuery 
-<script src="{{ "/js/jquery.min.js " | prepend: site.baseurl }}"></script>
-
- Bootstrap Core JavaScript 
-<script src="{{ "/js/bootstrap.min.js " | prepend: site.baseurl }}"></script>
--->
-<script src="{{ "/dist/js/all.min.js " | prepend: site.baseurl }}"></script>
-
-
-
-<script>
 /*
 	// async load function 
     function async(c) {
@@ -65,43 +53,6 @@
         if($nav) FastClick.attach($nav);
  });
 
-
-
-// Google Analytics 
-{% if site.ga_track_id %}
-$(function(){
-    // dynamic User by Hux
-    var _gaId = '{{ site.ga_track_id }}';
-    var _gaDomain = '{{ site.ga_domain }}';
-
-    // Originial
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', _gaId, _gaDomain);
-    ga('send', 'pageview');
-});
-{% endif %}
-
-
-// Baidu Tongji 
-{% if site.ba_track_id %}
-$(function(){
-    // dynamic User by Hux
-    var _baId = '{{ site.ba_track_id }}';
-
-    // Originial
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?" + _baId;
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-});
-{% endif %}
 
 // 鼠标悬停动画效果 
 
@@ -198,9 +149,6 @@ $(function(){
 
 */
 
-{% if site.anchorjs %}
-// anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-
  $(function(){
         anchors.options = {
           visible: 'hover',
@@ -210,7 +158,7 @@ $(function(){
  });
 
 
-{% endif %}
+
 // Handle Language Change 
 /*
     var $zh = document.querySelector(".zh");
@@ -252,6 +200,3 @@ $(function(){
 $(function(){
    $("img").lazyload({effect: "show",threshold: 300});
 });
-</script>
-
-

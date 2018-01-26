@@ -980,3 +980,22 @@ body {
     box-shadow: 10px 10px 5px #888;
     -moz-box-shadow: 10px 10px 5px #888; /* 老的 Firefox */
 }
+  /* place left on bigger screen */
+  @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+  }
+  	#scroll-to-top {
+		position:fixed;
+		opacity:0.8;
+		bottom:5%;
+		right:2%;
+		color:white;
+		border-radius:50px !important;
+    box-shadow: 1px 1px 10px #aaa;
+    outline:none;
+	}
