@@ -14,8 +14,8 @@ icon: "send"
 		opacity: 1;
     	background:white;
     	padding:1em;
-    	margin-left:10%;
-    	margin-right:10%;
+    	margin-left:5%;
+    	margin-right:5%;
     	margin-top:10em;
     	border:1px solid black;
     	border-radius:1em;
@@ -90,7 +90,7 @@ icon: "send"
 	   }
 	   var input = document.querySelector('div>input')
 	   var textWidth = input.offsetWidth
-	   var words = Math.round(textWidth/22)
+	   var words = parseInt(textWidth/22)
 	   var fullString = json.article
 	   var stringLength = fullString.length
 	   var times =  Math.ceil(stringLength/words)
