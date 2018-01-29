@@ -28,7 +28,7 @@ icon: "send"
 		width:100%;
 		border-radius:2em;
 		outline:none;
-		color:green;
+		color:gray;
 		font-size:1.2em;
 		padding-left:1em;
 		padding-right:1em;
@@ -36,6 +36,7 @@ icon: "send"
 	}
 	.content span{
 		color:black;
+		width:100%;
 		font-size:1.2em;
         font-style:bold;
 		padding-left:1em;
@@ -56,15 +57,64 @@ icon: "send"
 
 </style>
 <div class="background">
-	<div class="title"><span>马上就要成功了，加油！</span></div>
+	<div class="title" id="title"><span>马上就要成功了，加油！</span></div>
 	<article>	
-		<div class="content">
-			<span>冰灯是流行于中国北方的一种古老的民间艺术</span>
-			<input type="text" value="">
+		<div class="content" id="content1">
+			<span id="paragraph1">这里是文本</span>
+			<input type="text" id="input1" value="">
 		</div>
 	</article>
 </div>
 
 <script>
-	
+ xmlhttp=new XMLHttpRequest();
+ xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+      var json = JSON.parse(xmlhttp.responseText);
+      document.getElementById('title').innerHTML = json.title;
+      var i = 1; 
+      //增加节点
+      function add(){ 
+      	    var x = 'content'+i;
+	        var content = document.getElementById(x);  
+	        var contentParent = content.parentNode;  
+	        var clone = content.cloneNode(true);  
+	        //设置id属性保证其不重复  
+	        clone.id = "content" + (++i);
+	        clone.childNodes[1].id ="paragraph" +i;
+	        clone.childNodes[3].id ="input" +i;
+	        contentParent.appendChild(clone);
+
+	   }
+	   var input = document.querySelector('div>input')
+	   var textWidth = input.offsetWidth
+	   var words = Math.round(textWidth/22)
+	   var fullString = json.article
+	   var stringLength = fullString.length
+	   var times =  Math.ceil(stringLength/words)
+	   for(var j = 0;j<times;j++){
+	   	        var y = "paragraph" + (j+1);
+	   	   		var p = fullString.substring(words*j,words*(j+1))
+			    var paragraph = document.getElementById(y)
+			    paragraph.innerHTML = p;
+			    if (j<(times-1)){
+			        add();
+			    }
+	   }	       
+  }
+}
+xmlhttp.open("GET","/dazi/data.json",true);
+xmlhttp.send();
+/*校验
+window.onload=function(){
+	var inputTag = document.getElementsByTagName('input');
+	for(var z=1;z<inputTag.length;z++){
+		var inputId = "input" + z;
+		var paragraphId = "paragraph" + z;
+		var input = document.getElementById(inputId);
+		var paragraph = document.getElementById(paragraphId)
+	}
+}*/
 </script>
